@@ -1,13 +1,13 @@
 #include "head.h"
 
 /*
-Î´Íê³ÉÖ®ÊÂ
-1.°ÑÈ¡Ïû×¢ÊÍÕûºÏ½øÊ¶±ğ×Ö·ûµÄ×Ô¶¯»úÀïÃæ£¬Ô¤´¦ÀíÖ»±£Áô´ÓÎÄ¼şÖĞ¶ÁÈ¡Ô´Âë
-2.¼ÇÂ¼Ã¿¸öµ¥´ÊµÄĞĞÊı
-3.ºÍ×éÔ±ÉÌÁ¿¸÷¸öÖÖÀàµÄµ¥´ÊÓÃÄÄÖÖĞòÁĞÂë¼ÓÒÔ±íÊ¾
+æœªå®Œæˆä¹‹äº‹
+1.æŠŠå–æ¶ˆæ³¨é‡Šæ•´åˆè¿›è¯†åˆ«å­—ç¬¦çš„è‡ªåŠ¨æœºé‡Œé¢ï¼Œé¢„å¤„ç†åªä¿ç•™ä»æ–‡ä»¶ä¸­è¯»å–æºç 
+2.è®°å½•æ¯ä¸ªå•è¯çš„è¡Œæ•°
+3.å’Œç»„å‘˜å•†é‡å„ä¸ªç§ç±»çš„å•è¯ç”¨å“ªç§åºåˆ—ç åŠ ä»¥è¡¨ç¤º
 */
 
-bool checker::IsWord(char c)//¼ìÑéÊÇ·ñÎª×ÖÄ¸
+bool checker::IsWord(char c)//æ£€éªŒæ˜¯å¦ä¸ºå­—æ¯
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 	{
@@ -17,7 +17,7 @@ bool checker::IsWord(char c)//¼ìÑéÊÇ·ñÎª×ÖÄ¸
 		return false;
 }
 
-bool checker::IsNumber(char c)//¼ìÑéÊÇ·ñÎªÊı×Ö
+bool checker::IsNumber(char c)//æ£€éªŒæ˜¯å¦ä¸ºæ•°å­—
 {
 	if (c >= '0' && c <= '9')
 	{
@@ -27,7 +27,7 @@ bool checker::IsNumber(char c)//¼ìÑéÊÇ·ñÎªÊı×Ö
 		return false;
 }
 
-bool checker::IsZhibiao(char c)//¼ìÑéÊÇ·ñÎªÖÆ±í·û£¨¿ÉÊÓÎªµ¥´ÊµÄ·Ö½çÏß£©
+bool checker::IsZhibiao(char c)//æ£€éªŒæ˜¯å¦ä¸ºåˆ¶è¡¨ç¬¦ï¼ˆå¯è§†ä¸ºå•è¯çš„åˆ†ç•Œçº¿ï¼‰
 {
 	if (c == ' ' || c == '\n' || c == '\t')
 	{
@@ -37,7 +37,7 @@ bool checker::IsZhibiao(char c)//¼ìÑéÊÇ·ñÎªÖÆ±í·û£¨¿ÉÊÓÎªµ¥´ÊµÄ·Ö½çÏß£©
 		return false;
 }
 
-bool checker::IsPTOT(char c)//¼ìÑéÊÇ·ñÎª½ç·û¡¢ËãÊõ·ûµÄÒ»²¿·Ö
+bool checker::IsPTOT(char c)//æ£€éªŒæ˜¯å¦ä¸ºç•Œç¬¦ã€ç®—æœ¯ç¬¦çš„ä¸€éƒ¨åˆ†
 {
 	for (unsigned int i = 0; i < PT.size(); i++)
 	{
@@ -56,44 +56,44 @@ bool checker::IsPTOT(char c)//¼ìÑéÊÇ·ñÎª½ç·û¡¢ËãÊõ·ûµÄÒ»²¿·Ö
 	return false;
 }
 
-void recognizer::State_1()//³õÊ¼×´Ì¬
+void recognizer::State_1()//åˆå§‹çŠ¶æ€
 {
 	int& i = source_pt;
 	temp.clear();
 	while (i < source.size())
 	{
 		if (checker::IsZhibiao(source[i]) == true)
-		{//Ìø¹ıÖÆ±í·û
+		{//è·³è¿‡åˆ¶è¡¨ç¬¦
 			i++;
 			continue;
 		}
 		else if (source[i] == '_' || checker::IsWord(source[i]) == true)
-		{//±êÊ¶·û
+		{//æ ‡è¯†ç¬¦
 			recognizer::State_2();
 			break;
 		}
 		else if (checker::IsNumber(source[i]) == true)
-		{//³£Êı
+		{//å¸¸æ•°
 			recognizer::State_3();
 			break;
 		}
-		else if (source[i] == 39)//µ¥ÒıºÅµÄASCIIÂë
-		{//×Ö·û
+		else if (source[i] == 39)//å•å¼•å·çš„ASCIIç 
+		{//å­—ç¬¦
 			recognizer::State_4();
 			break;
 		}
-		else if (source[i] == 34)//Ë«ÒıºÅµÄASCIIÂë
-		{//×Ö·û´®
+		else if (source[i] == 34)//åŒå¼•å·çš„ASCIIç 
+		{//å­—ç¬¦ä¸²
 			recognizer::State_5();
 			break;
 		}
 		else if (checker::IsPTOT(source[i]) == true)
-		{//½ç·û»òÔËËã·û
+		{//ç•Œç¬¦æˆ–è¿ç®—ç¬¦
 			recognizer::State_6();
 			break;
 		}
 		else
-		{//Î´Öª×Ö·û
+		{//æœªçŸ¥å­—ç¬¦
 			recognizer::State_7('n');
 			break;
 		}
@@ -101,28 +101,28 @@ void recognizer::State_1()//³õÊ¼×´Ì¬
 	return;
 }
 
-void recognizer::State_2()//´¦Àí±êÊ¶·û
+void recognizer::State_2()//å¤„ç†æ ‡è¯†ç¬¦
 {
 	int& i = source_pt;
 	TOKEN Token;
 	Token_clear(Token);
 	while (checker::IsWord(source[i]) == true || checker::IsNumber(source[i]) == true || source[i] == '_')
-	{//×ÖÄ¸¡¢Êı×Ö¡¢ÏÂ»®Ïß
+	{//å­—æ¯ã€æ•°å­—ã€ä¸‹åˆ’çº¿
 		temp.push_back(source[i]);
 		i++;
-		if (i >= source.size())//·ÀÖ¹Ô½½ç
+		if (i >= source.size())//é˜²æ­¢è¶Šç•Œ
 		{
 			break;
 		}
 	}
-	if (i < source.size() && checker::IsPTOT(source[i]) == false && checker::IsZhibiao(source[i]) == false)//×îºóÎª·Ç½áÊø±êÖ¾
-	{//´íÎó×Ö·û
+	if (i < source.size() && checker::IsPTOT(source[i]) == false && checker::IsZhibiao(source[i]) == false)//æœ€åä¸ºéç»“æŸæ ‡å¿—
+	{//é”™è¯¯å­—ç¬¦
 		recognizer::State_7('i');
 		return;
 	}
 	for(vector<string>::iterator it = KT.begin(); it != KT.end(); it++)
     {
-        if(temp == *it)//ÔÚ¹Ø¼ü×Ö±íÖĞ²éÕÒµ½µ¥´Ê
+        if(temp == *it)//åœ¨å…³é”®å­—è¡¨ä¸­æŸ¥æ‰¾åˆ°å•è¯
         {
             Token.tpKT = it;
             Token.line = line;
@@ -131,34 +131,34 @@ void recognizer::State_2()//´¦Àí±êÊ¶·û
     }
     for(list<SYNBL>::iterator it = SYNBL_list.begin(); it != SYNBL_list.end(); it++)
     {
-        if(temp == (*it).name)//ÔÚ·ûºÅ±íÕÒµ½¸Ã±êÊ¶·û£¬ÔòÖ¸ÏòÕâ¸ö±êÊ¶·ûËùÔÚÎ»ÖÃ
+        if(temp == (*it).name)//åœ¨ç¬¦å·è¡¨æ‰¾åˆ°è¯¥æ ‡è¯†ç¬¦ï¼Œåˆ™æŒ‡å‘è¿™ä¸ªæ ‡è¯†ç¬¦æ‰€åœ¨ä½ç½®
         {
             Token.tpIT = it;
         }
-        else//ĞÂ³öÏÖµÄ±êÊ¶·û£¬¼ÓÈëµ½·ûºÅ±íÖĞ
+        else//æ–°å‡ºç°çš„æ ‡è¯†ç¬¦ï¼ŒåŠ å…¥åˆ°ç¬¦å·è¡¨ä¸­
         {
             SYNBL newid;
             newid.name = temp;
             SYNBL_list.push_back(newid);
-            Token.tpIT = --SYNBL_list.end();//È¡×îºóÒ»¸öÔªËØµÄµü´úÆ÷
+            Token.tpIT = --SYNBL_list.end();//å–æœ€åä¸€ä¸ªå…ƒç´ çš„è¿­ä»£å™¨
         }
     }
     Token.line = line;
     return;
 }
 
-void recognizer::State_3()//´¦Àí³£Êı
+void recognizer::State_3()//å¤„ç†å¸¸æ•°
 {
 	int& i = source_pt;
 	TOKEN Token;
 	Token_clear(Token);
 	while (checker::IsNumber(source[i]) == true)
-	{//Êı×Ö
+	{//æ•°å­—
 		temp.push_back(source[i]);
 		i++;
-		if (i >= source.size())//·ÀÖ¹Ô½½ç
+		if (i >= source.size())//é˜²æ­¢è¶Šç•Œ
 		{
-			int intc;//³£ÊıÎªÕûÊıĞÍ£¬×Ö·ûĞÍ×ªÎªÕûÊıĞÍ
+			int intc;//å¸¸æ•°ä¸ºæ•´æ•°å‹ï¼Œå­—ç¬¦å‹è½¬ä¸ºæ•´æ•°å‹
 			stringstream s;
 			s << temp;
 			s >> intc;
@@ -169,16 +169,16 @@ void recognizer::State_3()//´¦Àí³£Êı
 		}
 	}
 	if (source[i] == '.')
-	{//Ğ¡Êıµã
+	{//å°æ•°ç‚¹
 		temp.push_back(source[i]);
 		i++;
 		while (checker::IsNumber(source[i]) == true)
-		{//Êı×Ö
+		{//æ•°å­—
 			temp.push_back(source[i]);
 			i++;
-			if (i >= source.size())//·ÀÖ¹Ô½½ç
+			if (i >= source.size())//é˜²æ­¢è¶Šç•Œ
 			{
-				float floatc;//³£ÊıÎªÊµÊıĞÍ£¬×Ö·ûĞÍ×ªÎª¸¡µãĞÍ
+				float floatc;//å¸¸æ•°ä¸ºå®æ•°å‹ï¼Œå­—ç¬¦å‹è½¬ä¸ºæµ®ç‚¹å‹
                 stringstream s;
                 s << temp;
                 s >> floatc;
@@ -189,8 +189,8 @@ void recognizer::State_3()//´¦Àí³£Êı
 			}
 		}
 		if (checker::IsPTOT(source[i]) == true || checker::IsZhibiao(source[i]) == true)
-        {//Óöµ½½ç·û»òÖÆ±í·ûÍ£Ö¹
-            float floatc;//³£ÊıÎªÊµÊıĞÍ£¬×Ö·ûĞÍ×ªÎª¸¡µãĞÍ
+        {//é‡åˆ°ç•Œç¬¦æˆ–åˆ¶è¡¨ç¬¦åœæ­¢
+            float floatc;//å¸¸æ•°ä¸ºå®æ•°å‹ï¼Œå­—ç¬¦å‹è½¬ä¸ºæµ®ç‚¹å‹
             stringstream s;
             s << temp;
             s >> floatc;
@@ -200,14 +200,14 @@ void recognizer::State_3()//´¦Àí³£Êı
             return;
         }
         else
-        {//´íÎó×Ö·û
+        {//é”™è¯¯å­—ç¬¦
             recognizer::State_7('R');
             return;
         }
 	}
 	else if (checker::IsPTOT(source[i]) == true || checker::IsZhibiao(source[i]) == true)
-	{//Óöµ½½ç·û»òÖÆ±í·ûÍ£Ö¹
-		int intc;//³£ÊıÎªÕûÊıĞÍ£¬×Ö·ûĞÍ×ªÎªÕûÊıĞÍ
+	{//é‡åˆ°ç•Œç¬¦æˆ–åˆ¶è¡¨ç¬¦åœæ­¢
+		int intc;//å¸¸æ•°ä¸ºæ•´æ•°å‹ï¼Œå­—ç¬¦å‹è½¬ä¸ºæ•´æ•°å‹
         stringstream s;
         s << temp;
         s >> intc;
@@ -217,22 +217,22 @@ void recognizer::State_3()//´¦Àí³£Êı
         return;
 	}
 	else
-	{//´íÎó×Ö·û
+	{//é”™è¯¯å­—ç¬¦
 		recognizer::State_7('Z');
 		return;
 	}
 }
 
-void recognizer::State_4()//´¦Àí×Ö·û
+void recognizer::State_4()//å¤„ç†å­—ç¬¦
 {
 	int& i = source_pt;
 	TOKEN Token;
 	Token_clear(Token);
-	i++;//Ìø¹ıµÚÒ»¸öµ¥ÒıºÅ
+	i++;//è·³è¿‡ç¬¬ä¸€ä¸ªå•å¼•å·
 	if (i >= source.size())
-	{//·ÀÖ¹Ô½½ç
+	{//é˜²æ­¢è¶Šç•Œ
 		for(vector<string>::iterator it = PT.begin(); it != PT.end(); it++)
-        {//'×÷Îª³ÌĞò½áÎ²Ôò°´Ò»¸ö½ç·ûËã
+        {//'ä½œä¸ºç¨‹åºç»“å°¾åˆ™æŒ‰ä¸€ä¸ªç•Œç¬¦ç®—
             if(*it == "\'")
             {
                 Token.tpPT = it;
@@ -244,7 +244,7 @@ void recognizer::State_4()//´¦Àí×Ö·û
 	while (source[i] != 39)
 	{
 		if (source[i] == '\n' || i >= source.size())
-		{//Ô½½çÉĞÎ´Æ¥Åäµ½ÏÂÒ»¸ö'£¬»ò³öÏÖÁË»»ĞĞ·û
+		{//è¶Šç•Œå°šæœªåŒ¹é…åˆ°ä¸‹ä¸€ä¸ª'ï¼Œæˆ–å‡ºç°äº†æ¢è¡Œç¬¦
 			Token.line = line;
             Token.token = 'c';
             ERRORL newerr;
@@ -258,7 +258,7 @@ void recognizer::State_4()//´¦Àí×Ö·û
 		i++;
 	}
 	if(temp.size() == 0)
-    {//¿Õ°××Ö·û£¬°´´íÎó´¦Àí
+    {//ç©ºç™½å­—ç¬¦ï¼ŒæŒ‰é”™è¯¯å¤„ç†
         Token.line = line;
         Token.token = 'c';
         ERRORL newerr;
@@ -269,22 +269,22 @@ void recognizer::State_4()//´¦Àí×Ö·û
         return;
     }
     Token.tpC = new CHAR;
-    Token.tpC->numc = temp[0];//Ö»±£ÁôµÚÒ»¸ö×Ö·û
+    Token.tpC->numc = temp[0];//åªä¿ç•™ç¬¬ä¸€ä¸ªå­—ç¬¦
     Token.line = line;
 	i++;
 	return;
 }
 
-void recognizer::State_5()//´¦Àí×Ö·û´®
+void recognizer::State_5()//å¤„ç†å­—ç¬¦ä¸²
 {
 	int& i = source_pt;
 	TOKEN Token;
 	Token_clear(Token);
 	i++;
 	if (i >= source.size())
-	{//·ÀÖ¹Ô½½ç
+	{//é˜²æ­¢è¶Šç•Œ
 		for(vector<string>::iterator it = PT.begin(); it != PT.end(); it++)
-        {//'×÷Îª³ÌĞò½áÎ²Ôò°´Ò»¸ö½ç·ûËã
+        {//'ä½œä¸ºç¨‹åºç»“å°¾åˆ™æŒ‰ä¸€ä¸ªç•Œç¬¦ç®—
             if(*it == "\"")
             {
                 Token.tpPT = it;
@@ -296,7 +296,7 @@ void recognizer::State_5()//´¦Àí×Ö·û´®
 	while (source[i] != 34)
 	{
 		if (source[i] == '\n' || i >= source.size())
-		{//Ô½½çÉĞÎ´Æ¥Åäµ½ÏÂÒ»¸ö'£¬»ò³öÏÖÁË»»ĞĞ·û
+		{//è¶Šç•Œå°šæœªåŒ¹é…åˆ°ä¸‹ä¸€ä¸ª'ï¼Œæˆ–å‡ºç°äº†æ¢è¡Œç¬¦
 			Token.line = line;
             Token.token = 's';
             ERRORL newerr;
@@ -315,7 +315,7 @@ void recognizer::State_5()//´¦Àí×Ö·û´®
 	return;
 }
 
-void recognizer::State_6()//´¦Àí½ç·ûºÍËãÊõ·û
+void recognizer::State_6()//å¤„ç†ç•Œç¬¦å’Œç®—æœ¯ç¬¦
 {
 	/*"[", "]", "(", ")", ".", "->", "-", "++", "--", "*", "&", "!",
 	"/", "%", "+", ">", "<", ">=", "<=", "==", "!=", "&&", "||", "=",
@@ -327,7 +327,7 @@ void recognizer::State_6()//´¦Àí½ç·ûºÍËãÊõ·û
 	i++;
 	temp.push_back(c);
 	if (i == source.size())
-	{//ÈôÎªÔ´³ÌĞòµÄ×îºóÒ»¸ö×Ö·û£¬Ö±½Ó´¦Àí
+	{//è‹¥ä¸ºæºç¨‹åºçš„æœ€åä¸€ä¸ªå­—ç¬¦ï¼Œç›´æ¥å¤„ç†
 	    for(vector<string>::iterator it = PT.begin(); it != PT.end(); it++)
         {
             if(*it == temp)
@@ -346,7 +346,7 @@ void recognizer::State_6()//´¦Àí½ç·ûºÍËãÊõ·û
 		return;
 	}
 	switch (c)
-	{//¿¼ÂÇË«Ä¿½ç·û»òÔËËã·û
+	{//è€ƒè™‘åŒç›®ç•Œç¬¦æˆ–è¿ç®—ç¬¦
 	case '+':
 		if (source[i] == '+' || source[i] == '=')
 		{
@@ -409,13 +409,13 @@ void recognizer::State_6()//´¦Àí½ç·ûºÍËãÊõ·û
 	return;
 }
 
-void recognizer::State_7(char mode)//´¦Àí´íÎó×Ö·û
+void recognizer::State_7(char mode)//å¤„ç†é”™è¯¯å­—ç¬¦
 {
 	int& i = source_pt;
 	TOKEN Token;
 	Token_clear(Token);
 	while (i < source.size() && checker::IsPTOT(source[i]) == false && checker::IsZhibiao(source[i]) == false)
-	{//½«ÏÂÒ»¸ö½ç·û»òÖÆ±í·ûÇ°µÄ×Ö·û¶¼¹éÎª¸Ã´íÎóµ¥´Ê
+	{//å°†ä¸‹ä¸€ä¸ªç•Œç¬¦æˆ–åˆ¶è¡¨ç¬¦å‰çš„å­—ç¬¦éƒ½å½’ä¸ºè¯¥é”™è¯¯å•è¯
 		temp.push_back(source[i]);
 		i++;
 	}
@@ -429,7 +429,7 @@ void recognizer::State_7(char mode)//´¦Àí´íÎó×Ö·û
 	return;
 }
 
-void preprocessor()//½ÓÊÕÔ¤´¦ÀíÔ´´úÂë£¬È¥³ı×¢ÊÍ
+void preprocessor()//æ¥æ”¶é¢„å¤„ç†æºä»£ç ï¼Œå»é™¤æ³¨é‡Š
 {
 	testfile.open("testfile.txt");
 	source_pt = 0;
@@ -442,37 +442,37 @@ void preprocessor()//½ÓÊÕÔ¤´¦ÀíÔ´´úÂë£¬È¥³ı×¢ÊÍ
 	{
 		int begin = i, length = 0;
 		if (i != source.size() - 1 && source[i] == '/' && source[i + 1] == '/')
-		{//È¥³ıµ¥ĞĞ×¢ÊÍ
+		{//å»é™¤å•è¡Œæ³¨é‡Š
 			while (i != source.size() && source[i] != '\n')
 			{
 				i++;
 				length++;
 			}
 			source.erase(begin, length);
-			i = begin - 1;//ÖØÖÃiµÄÎ»ÖÃ
+			i = begin - 1;//é‡ç½®içš„ä½ç½®
 			continue;
 		}
 		if (i != source.size() - 1 && source[i] == '/' && source[i + 1] == '*')
-		{//È¥³ı¶àĞĞ×¢ÊÍ
+		{//å»é™¤å¤šè¡Œæ³¨é‡Š
 			while (i != source.size() - 1 && (source[i] != '*' || source[i + 1] != '/'))
 			{
 				i++;
 				length++;
 			}
-			if (i == source.size() - 1)//ÒÑ¼ì²éµ½Ä©Î²
+			if (i == source.size() - 1)//å·²æ£€æŸ¥åˆ°æœ«å°¾
 			{
 				source.erase(begin);
 				break;
 			}
-			length += 2;//¼ÓÉÏ*/µÄ³¤¶È
+			length += 2;//åŠ ä¸Š*/çš„é•¿åº¦
 			source.erase(begin, length);
-			i = begin - 1;//ÖØÖÃiµÄÎ»ÖÃ
+			i = begin - 1;//é‡ç½®içš„ä½ç½®
 			continue;
 		}
 	}
 }
 
-void Token_clear(TOKEN& Token)//½«Ò»¸öTOKENµÄÄÚÈİÇå¿Õ
+void Token_clear(TOKEN& Token)//å°†ä¸€ä¸ªTOKENçš„å†…å®¹æ¸…ç©º
 {
     Token.token.clear();
     Token.line = 0;
@@ -481,7 +481,7 @@ void Token_clear(TOKEN& Token)//½«Ò»¸öTOKENµÄÄÚÈİÇå¿Õ
     Token.tpC = NULL;
 }
 
-void SCANNER()//´Ê·¨·ÖÎö
+void SCANNER()//è¯æ³•åˆ†æ
 {
-    recognizer::State_1();//µ÷ÓÃµ¥´ÊÊ¶±ğÆ÷£¬Ê¶±ğµÄ½á¹û±£´æÔÚTOKENÖĞ
+    recognizer::State_1();//è°ƒç”¨å•è¯è¯†åˆ«å™¨ï¼Œè¯†åˆ«çš„ç»“æœä¿å­˜åœ¨TOKENä¸­
 }

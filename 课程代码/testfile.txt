@@ -1,0 +1,20 @@
+void main()
+{
+  int a, b@;
+  a = 1.ab;
+  b = 1;
+  char c = 'a;
+  char s[10] = "abcd;
+  while(b < 5a)
+  {
+    if(a % 2 == 0)
+    {
+      cout a;
+    }
+    else
+    {
+      b++;
+    }
+    ++a;
+  }
+}

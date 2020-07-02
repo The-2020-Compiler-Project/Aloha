@@ -1,0 +1,612 @@
+#include "head.h"
+
+bool checker::IsWord(char c)//检验是否为字母
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool checker::IsNumber(char c)//检验是否为数字
+{
+	if (c >= '0' && c <= '9')
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool checker::IsZhibiao(char c)//检验是否为制表符（可视为单词的分界线）
+{
+	if (c == ' ' || c == '\n' || c == '\t')
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool checker::IsPTOT(char c)//检验是否为界符、算术符的一部分
+{
+	for (unsigned int i = 0; i < PT.size(); i++)
+	{
+		if (PT[i].find(c, 0) != string::npos)
+		{
+			return true;
+		}
+	}
+	for (unsigned int i = 0; i < OT.size(); i++)
+	{
+		if (OT[i].find(c, 0) != string::npos)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void recognizer::State_1()//初始状态
+{
+	int& i = source_pt;
+	temp.clear();
+	while (i < source.size())
+	{
+		if (checker::IsZhibiao(source[i]) == true)
+		{//跳过制表符
+			if(source[i] == '\n')line++;
+			i++;
+			continue;
+		}
+		else if (source[i] == '/')
+        {
+            recognizer::State_1_2();
+            continue;
+        }
+		else if (source[i] == '_' || checker::IsWord(source[i]) == true)
+		{//标识符
+			recognizer::State_2();
+			break;
+		}
+		else if (checker::IsNumber(source[i]) == true)
+		{//常数
+			recognizer::State_3();
+			break;
+		}
+		else if (source[i] == 39)//单引号的ASCII码
+		{//字符
+			recognizer::State_4();
+			break;
+		}
+		else if (source[i] == 34)//双引号的ASCII码
+		{//字符串
+			recognizer::State_5();
+			break;
+		}
+		else if (checker::IsPTOT(source[i]) == true)
+		{//界符或运算符
+			recognizer::State_6();
+			break;
+		}
+		else
+		{//未知字符
+			recognizer::State_7('n');
+			break;
+		}
+	}
+	return;
+}
+
+void recognizer::State_1_2()//去除注释
+{
+    int& i = source_pt;
+    if (i == source.size() - 1)//斜杠是程序中最后一个字符
+    {
+        recognizer::State_6();//转到界符处理
+        return;
+    }
+    else if (source[i] == '/' && source[i + 1] == '/')
+    {//去除单行注释
+        while (i != source.size() && source[i] != '\n')
+        {
+            i++;
+        }
+        return;
+    }
+    else if (source[i] == '/' && source[i + 1] == '*')
+    {//去除多行注释
+        while (i != source.size() - 1 && (source[i] != '*' || source[i + 1] != '/'))
+        {
+            i++;
+            if(source[i] == '\n')line++;
+        }
+        if (i == source.size() - 1)//已检查到末尾
+        {
+            i++;
+            return;
+        }
+        else//找到多行注释结束标志
+        {
+            i += 2;//跳过结束标志
+        }
+    }
+    else//不是注释，仅为一个斜杠符号
+    {
+        recognizer::State_6();//转到界符处理
+        return;
+    }
+    return;
+}
+
+void recognizer::State_2()//处理标识符
+{
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	while (checker::IsWord(source[i]) == true || checker::IsNumber(source[i]) == true || source[i] == '_')
+	{//字母、数字、下划线
+		temp.push_back(source[i]);
+		i++;
+		if (i >= source.size())//防止越界
+		{
+			break;
+		}
+	}
+	if (i < source.size() && checker::IsPTOT(source[i]) == false && checker::IsZhibiao(source[i]) == false)//最后为非结束标志
+	{//错误字符
+		recognizer::State_7('i');
+		return;
+	}
+	int num = 0;
+	for(vector<string>::iterator it = KT.begin(); it != KT.end(); it++, num++)
+    {
+        if(temp == *it)//在关键字表中查找到单词
+        {
+            string nums;
+            stringstream ss;
+            ss << num;
+            ss >> nums;
+            Token.token = "KT" + nums;
+            Token.tpKT = it;
+            Token.line = line;
+            TOKEN_list.push_back(Token);
+            return;
+        }
+    }
+    int isfind = 0;
+    for(list<SYNBL>::iterator it = SYNBL_list.begin(); it != SYNBL_list.end(); it++)
+    {
+        if(temp == (*it).name)//在符号表找到该标识符，则指向这个标识符所在位置
+        {
+            Token.tpIT = it;
+            isfind = 1;
+            break;
+        }
+
+    }
+    if(!isfind)//新出现的标识符，加入到符号表中
+    {
+        SYNBL newid;
+        newid.name = temp;
+        SYNBL_list.push_back(newid);
+        Token.tpIT = --SYNBL_list.end();//取最后一个元素的迭代器
+    }
+    Token.token = "IT";
+    Token.line = line;
+    TOKEN_list.push_back(Token);
+    return;
+}
+
+void recognizer::State_3()//处理常数
+{
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	while (checker::IsNumber(source[i]) == true)
+	{//数字
+		temp.push_back(source[i]);
+		i++;
+		if (i >= source.size())//防止越界
+		{
+			int intc;//常数为整数型，字符型转为整数型
+			stringstream s;
+			s << temp;
+			s >> intc;
+			Token.tpI = new INT;
+			Token.tpI->numi = intc;
+			Token.line = line;
+			Token.token = "ZT";
+			TOKEN_list.push_back(Token);
+			return;
+		}
+	}
+	if (source[i] == '.')
+	{//小数点
+		temp.push_back(source[i]);
+		i++;
+		while (checker::IsNumber(source[i]) == true)
+		{//数字
+			temp.push_back(source[i]);
+			i++;
+			if (i >= source.size())//防止越界
+			{
+				float floatc;//常数为实数型，字符型转为浮点型
+                stringstream s;
+                s << temp;
+                s >> floatc;
+                Token.tpR = new REAL;
+                Token.tpR->numf = floatc;
+                Token.line = line;
+                Token.token = "RT";
+                TOKEN_list.push_back(Token);
+                return;
+			}
+		}
+		if (checker::IsPTOT(source[i]) == true || checker::IsZhibiao(source[i]) == true)
+        {//遇到界符或制表符停止
+            float floatc;//常数为实数型，字符型转为浮点型
+            stringstream s;
+            s << temp;
+            s >> floatc;
+            Token.tpR = new REAL;
+            Token.tpR->numf = floatc;
+            Token.line = line;
+            Token.token = "RT";
+            TOKEN_list.push_back(Token);
+            return;
+        }
+        else
+        {//错误字符
+            recognizer::State_7('R');
+            return;
+        }
+	}
+	else if (checker::IsPTOT(source[i]) == true || checker::IsZhibiao(source[i]) == true)
+	{//遇到界符或制表符停止
+		int intc;//常数为整数型，字符型转为整数型
+        stringstream s;
+        s << temp;
+        s >> intc;
+        Token.tpI = new INT;
+        Token.tpI->numi = intc;
+        Token.line = line;
+        Token.token = "ZT";
+        TOKEN_list.push_back(Token);
+        return;
+	}
+	else
+	{//错误字符
+		recognizer::State_7('Z');
+		return;
+	}
+}
+
+void recognizer::State_4()//处理字符
+{
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	i++;//跳过第一个单引号
+	if (i >= source.size())
+	{//防止越界
+		i--;
+		recognizer::State_6();//越界则按界符算
+		return;
+	}
+	while (source[i] != 39)
+	{
+		if (source[i] == '\n' || i >= source.size())
+		{//越界尚未匹配到下一个'，或出现了换行符
+			Token.line = line;
+            Token.token = "ERROR";
+            ERRORL newerr;
+            newerr.name = temp;
+            newerr.line = line;
+            newerr.type = 'c';
+            ERRORL_list.push_back(newerr);
+            Token.tpER = --ERRORL_list.end();
+            TOKEN_list.push_back(Token);
+			return;
+		}
+		temp.push_back(source[i]);
+		i++;
+	}
+	if(temp.size() == 0)
+    {//空白字符，按错误处理
+        Token.line = line;
+        Token.token = "ERROR";
+        ERRORL newerr;
+        newerr.name = "\'\'";
+        newerr.line = line;
+        newerr.type = 'c';
+        ERRORL_list.push_back(newerr);
+        Token.tpER = --ERRORL_list.end();
+        TOKEN_list.push_back(Token);
+        return;
+    }
+    Token.tpC = new CHAR;
+    Token.tpC->numc = temp[0];//只保留第一个字符
+    Token.line = line;
+    Token.token = "CT";
+    TOKEN_list.push_back(Token);
+	i++;
+	return;
+}
+
+void recognizer::State_5()//处理字符串
+{
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	i++;
+	if (i >= source.size())
+	{//防止越界
+		i--;
+		recognizer::State_6();//越界则按界符算
+		return;
+	}
+	while (source[i] != 34)
+	{
+		if (source[i] == '\n' || i >= source.size())
+		{//越界尚未匹配到下一个'，或出现了换行符
+			Token.line = line;
+            Token.token = "ERROR";
+            ERRORL newerr;
+            newerr.name = temp;
+            newerr.line = line;
+            newerr.type = 's';
+            ERRORL_list.push_back(newerr);
+            Token.tpER = --ERRORL_list.end();
+            TOKEN_list.push_back(Token);
+            return;
+		}
+		temp.push_back(source[i]);
+		i++;
+	}
+	Token.token = "ST";
+    Token.tps = temp;
+    Token.line = line;
+    TOKEN_list.push_back(Token);
+	i++;
+	return;
+}
+
+void recognizer::State_6()//处理界符和算术符
+{
+	/*"[", "]", "(", ")", ".", "->", "-", "++", "--", "*", "&", "!",
+	"/", "%", "+", ">", "<", ">=", "<=", "==", "!=", "&&", "||", "=",
+	"+=", "-=", "*=", "/=", "%=", ",", ";", "|"*/
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	int num = 0, isfind = 0;
+	char c = source[i];
+	i++;
+	temp.push_back(c);
+	if (i == source.size())
+	{//若为源程序的最后一个字符，直接处理
+	    for(vector<string>::iterator it = PT.begin(); it != PT.end(); it++, num++)
+        {
+            if(*it == temp)
+            {
+                Token.tpPT = it;
+                string nums;
+                stringstream ss;
+                ss << num;
+                ss >> nums;
+                Token.token = "PT" + nums;
+                isfind = 1;
+                break;
+            }
+        }
+        if(!isfind)
+        {
+            num = 0;
+            for(vector<string>::iterator it = OT.begin(); it != OT.end(); it++)
+            {
+                if(*it == temp)
+                {
+                    Token.tpOT = it;
+                    string nums;
+                    stringstream ss;
+                    ss << num;
+                    ss >> nums;
+                    Token.token = "OT" + nums;
+                    break;
+                }
+            }
+        }
+        Token.line = line;
+        TOKEN_list.push_back(Token);
+		return;
+	}
+	switch (c)
+	{//考虑双目界符或运算符
+	case '+':
+		if (source[i] == '+' || source[i] == '=')
+		{
+			temp.push_back(source[i]);
+			i++;
+		}
+		break;
+	case '-':
+		if (source[i] == '-' || source[i] == '=' || source[i] == '>')
+		{
+			temp.push_back(source[i]);
+			i++;
+		}
+		break;
+	case '&':
+		if (source[i] == '&')
+		{
+			temp.push_back(source[i]);
+			i++;
+		}
+		break;
+	case '|':
+		if (source[i] == '|')
+		{
+			temp.push_back(source[i]);
+			i++;
+		}
+		break;
+	case '*':
+	case '/':
+	case '%':
+	case '=':
+	case '>':
+	case '<':
+	case '!':
+		if (source[i] == '=')
+		{
+			temp.push_back(source[i]);
+			i++;
+		}
+		break;
+	default:
+		break;
+	}
+	num = 0;
+	isfind = 0;
+	for(vector<string>::iterator it = PT.begin(); it != PT.end(); it++, num++)
+    {
+        if(*it == temp)
+        {
+            Token.tpPT = it;
+            string nums;
+            stringstream ss;
+            ss << num;
+            ss >> nums;
+            Token.token = "PT" + nums;
+            isfind = 1;
+            break;
+        }
+    }
+    if(!isfind)
+    {
+        num = 0;
+        for(vector<string>::iterator it = OT.begin(); it != OT.end(); it++)
+        {
+            if(*it == temp)
+            {
+                Token.tpOT = it;
+                string nums;
+                stringstream ss;
+                ss << num;
+                ss >> nums;
+                Token.token = "OT" + nums;
+                break;
+            }
+        }
+    }
+    Token.line = line;
+    TOKEN_list.push_back(Token);
+	return;
+}
+
+void recognizer::State_7(char mode)//处理错误字符
+{
+	int& i = source_pt;
+	TOKEN Token;
+	Token_clear(Token);
+	while (i < source.size() && checker::IsPTOT(source[i]) == false && checker::IsZhibiao(source[i]) == false)
+	{//将下一个界符或制表符前的字符都归为该错误单词
+		temp.push_back(source[i]);
+		i++;
+	}
+	Token.line = line;
+	Token.token = "ERROR";
+	ERRORL newerr;
+	newerr.name = temp;
+	newerr.line = line;
+	newerr.type = mode;
+	ERRORL_list.push_back(newerr);
+	Token.tpER = --ERRORL_list.end();
+	TOKEN_list.push_back(Token);
+	return;
+}
+
+void preprocessor()//接收预处理源代码
+{
+	testfile.open("testfile.txt");
+	source_pt = 0;
+	line = 1;
+	char ch;
+	while ((ch = testfile.get()) != EOF)
+	{
+		source.push_back(ch);
+	}
+}
+
+void Token_clear(TOKEN& Token)//将一个TOKEN的内容清空
+{
+    Token.token.clear();
+    Token.line = 0;
+    Token.tpI = NULL;
+    Token.tpR = NULL;
+    Token.tpC = NULL;
+}
+
+void SCANNER()//词法分析
+{
+    recognizer::State_1();//调用单词识别器，识别的结果保存在TOKEN中
+}
+
+void testprint()
+{
+    preprocessor();
+    int i = 1;
+    while(source_pt < source.size())
+    {
+        SCANNER();
+        list<TOKEN>::iterator it = --TOKEN_list.end();
+        if((*it).line > i)
+        {
+        	cout << endl;
+        	i = (*it).line;
+		}
+		cout << "<" << (*it).token << ",";
+        if((*it).token.find("KT") != string::npos)cout << *((*it).tpKT);
+        else if((*it).token.find("IT") != string::npos)cout << (*((*it).tpIT)).name;
+        else if((*it).token.find("PT") != string::npos)cout << *((*it).tpPT);
+        else if((*it).token.find("OT") != string::npos)cout << *((*it).tpOT);
+        else if((*it).token.find("ZT") != string::npos)cout << (*it).tpI->numi;
+        else if((*it).token.find("RT") != string::npos)cout << (*it).tpR->numf;
+        else if((*it).token.find("CT") != string::npos)cout << (*it).tpC->numc;
+        else if((*it).token.find("ST") != string::npos)cout << (*it).tps;
+        else if((*it).token == "ERROR") cout << (*((*it).tpER)).name;
+        cout << ">";
+    }
+    cout << endl;
+    cout << "--------------------------------" << endl;
+    for(list<ERRORL>::iterator it = ERRORL_list.begin(); it != ERRORL_list.end(); it++)
+    {
+        cout << "line:" << (*it).line << "\t[ERROR] " << (*it).name << " ";
+        switch((*it).type)
+        {//n.i,R,Z,c,s
+        case 'n':
+            cout << "未知符号" << endl;
+            break;
+        case 'i':
+            cout << "标识符组成字符不合法" << endl;
+            break;
+        case 'R':
+            cout << "实数书写不合法" << endl;
+            break;
+        case 'Z':
+            cout << "整数书写不合法" << endl;
+            break;
+        case 'c':
+            cout << "字符不完整" << endl;
+            break;
+        case 's':
+            cout << "字符串不完整" << endl;
+            break;
+        default:
+            cout << "报错错误" << endl;
+        }
+    }
+}

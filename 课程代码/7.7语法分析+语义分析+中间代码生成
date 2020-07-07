@@ -2,8 +2,8 @@
 
 class GrammaticalAnalysis{
 private:
-    //Óï·¨²¿·Ö
-    list<TOKEN>::iterator ch;//µ±Ç°´ÊµÄµü´úÆ÷
+    //è¯­æ³•éƒ¨åˆ†
+    list<TOKEN>::iterator ch;//å½“å‰è¯çš„è¿­ä»£å™¨
     int Start();
     int Function();
     int Parameter();
@@ -35,47 +35,47 @@ private:
     int While();
     int Fun();
     void nextW();
-    //ÓïÒå²¿·Ö
-    int d; //½á¹¹Ìå±ê¼Ç
-    list<TOKEN>::iterator type;//ÀàĞÍ±ê¼Ç
-    list<TOKEN>::iterator ch_sem;//ÈëÓïÒåÕ»µÄ´Ê
-    list<TOKEN>::iterator ch_function;//º¯ÊıÃû±ê¼Ç
-    list<TOKEN>::iterator ch_struct;//struct µÄ±ê¼Ç
-    list<TOKEN>::iterator operand_now;//µ±Ç°²Ù×÷Êı
+    //è¯­ä¹‰éƒ¨åˆ†
+    int d; //ç»“æ„ä½“æ ‡è®°
+    list<TOKEN>::iterator type;//ç±»å‹æ ‡è®°
+    list<TOKEN>::iterator ch_sem;//å…¥è¯­ä¹‰æ ˆçš„è¯
+    list<TOKEN>::iterator ch_function;//å‡½æ•°åæ ‡è®°
+    list<TOKEN>::iterator ch_struct;//struct çš„æ ‡è®°
+    list<TOKEN>::iterator operand_now;//å½“å‰æ“ä½œæ•°
     list<SEM>::iterator top;
     list<SEM>::iterator base;
-    list<Quaternary>::iterator quater_now;//µ±Ç°ËÄÔªÊ½Ö¸Õë
-    int mark;//±êÃ÷ÔËËã·ûÎ»ÖÃ
-    int counter;//ÏµÍ³±äÁ¿¼ÆÊıÆ÷
-    void Bi_oper_qua();//Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
-    void Unary_oper_qua();//µ¥Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
-    void Assign_oper_qua();//¸³Öµ²Ù×÷ÊıÉú³É
-    void If_While_qua();//IFÌõ¼ş,WHILEÑ­»·²Ù×÷ÊıÉú³É
-    //void GetMark(list<TOKEN>::iterator ch_ope);//»ñÈ¡ÔËËã·û
-    void GetMark_front(list<TOKEN>::iterator ch_ope);//»ñÈ¡Ç°ÖÃÔËËã·û
-    int FindSynbl();//²éÖØ
-    void PushSynbl();//Ìí¼Ó½ø·ûºÅ±í
-    int CoutSynbl();//Êä³ö·ûºÅ±í
-    void CheckSynbl();//¼ì²é±êÊ¶·ûÊÇ·ñ±»¶¨Òå£¬Î´¶¨ÒåÔò¼ÇÂ¼µ½´íÎó±íÖĞ
-    void PushRinfl();//Ìí¼Ó½ø½á¹¹±í
-    void CoutRinfl();//Êä³ö½á¹¹±í
+    list<Quaternary>::iterator quater_now;//å½“å‰å››å…ƒå¼æŒ‡é’ˆ
+    int mark;//æ ‡æ˜è¿ç®—ç¬¦ä½ç½®
+    int counter;//ç³»ç»Ÿå˜é‡è®¡æ•°å™¨
+    void Bi_oper_qua();//åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
+    void Unary_oper_qua();//å•ç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
+    void Assign_oper_qua();//èµ‹å€¼æ“ä½œæ•°ç”Ÿæˆ
+    void If_While_qua();//IFæ¡ä»¶,WHILEå¾ªç¯æ“ä½œæ•°ç”Ÿæˆ
+    //void GetMark(list<TOKEN>::iterator ch_ope);//è·å–è¿ç®—ç¬¦
+    void GetMark_front(list<TOKEN>::iterator ch_ope);//è·å–å‰ç½®è¿ç®—ç¬¦
+    int FindSynbl();//æŸ¥é‡
+    void PushSynbl();//æ·»åŠ è¿›ç¬¦å·è¡¨
+    int CoutSynbl();//è¾“å‡ºç¬¦å·è¡¨
+    void CheckSynbl();//æ£€æŸ¥æ ‡è¯†ç¬¦æ˜¯å¦è¢«å®šä¹‰ï¼Œæœªå®šä¹‰åˆ™è®°å½•åˆ°é”™è¯¯è¡¨ä¸­
+    void PushRinfl();//æ·»åŠ è¿›ç»“æ„è¡¨
+    void CoutRinfl();//è¾“å‡ºç»“æ„è¡¨
 
 public:
     void Grammar();
-    //Óï·¨²¿·Ö
+    //è¯­æ³•éƒ¨åˆ†
     int result;
     int end;
     int begin;
-    list<SYNBL>::iterator id;//ÓÃ»§¶¨Òå±êÊ¶·û
-    list<SYNBL>::iterator id_now;//µ±Ç°±êÊ¶·ûÖ¸Õë
-    list<SYNBL>::iterator id_struct;//½á¹¹ÌåÃû±êÊ¶·ûÖ¸Õë
-    list<RINFL>::iterator rinfl_now;//½á¹¹±íµ±Ç°Ö¸Õë
-    //ÓïÒå²¿·Ö
-    list<TOKEN>::iterator ch_ope;//²Ù×÷·û 
+    list<SYNBL>::iterator id;//ç”¨æˆ·å®šä¹‰æ ‡è¯†ç¬¦
+    list<SYNBL>::iterator id_now;//å½“å‰æ ‡è¯†ç¬¦æŒ‡é’ˆ
+    list<SYNBL>::iterator id_struct;//ç»“æ„ä½“åæ ‡è¯†ç¬¦æŒ‡é’ˆ
+    list<RINFL>::iterator rinfl_now;//ç»“æ„è¡¨å½“å‰æŒ‡é’ˆ
+    //è¯­ä¹‰éƒ¨åˆ†
+    list<TOKEN>::iterator ch_ope;//æ“ä½œç¬¦ 
     void CoutQuaternary();
 };
 
-void GrammaticalAnalysis::Grammar()//Óï·¨·ÖÎö³õÊ¼»¯²¿·Ö
+void GrammaticalAnalysis::Grammar()//è¯­æ³•åˆ†æåˆå§‹åŒ–éƒ¨åˆ†
 {
     TOKEN t;
     t.token="NULL";
@@ -86,13 +86,13 @@ void GrammaticalAnalysis::Grammar()//Óï·¨·ÖÎö³õÊ¼»¯²¿·Ö
     end = 0;
 	nextW();
     result=0;
-    result=Start();//Ö´ĞĞÓï·¨ºÍÓïÒå¶¯×÷
-    CheckSynbl();//¼ì²éËÄÔªÊ½ÖĞÓÃ»§¶¨ÒåµÄ±êÊ¶·ûÊÇ·ñÔÚ·ûºÅ±íÖĞ´æÔÚ
-    CoutSynbl();//Êä³ö·ûºÅ±íĞÅÏ¢
+    result=Start();//æ‰§è¡Œè¯­æ³•å’Œè¯­ä¹‰åŠ¨ä½œ
+    CheckSynbl();//æ£€æŸ¥å››å…ƒå¼ä¸­ç”¨æˆ·å®šä¹‰çš„æ ‡è¯†ç¬¦æ˜¯å¦åœ¨ç¬¦å·è¡¨ä¸­å­˜åœ¨
+    CoutSynbl();//è¾“å‡ºç¬¦å·è¡¨ä¿¡æ¯
     CoutQuaternary();
 }
 
-void GrammaticalAnalysis::nextW()//¶ÁÈ¡ÏÂÒ»¸öµ¥´Ê
+void GrammaticalAnalysis::nextW()//è¯»å–ä¸‹ä¸€ä¸ªå•è¯
 {
 	if(begin)
 	{
@@ -107,19 +107,19 @@ void GrammaticalAnalysis::nextW()//¶ÁÈ¡ÏÂÒ»¸öµ¥´Ê
 	if(ch == --(TOKEN_list.end()))end = 1;
 }
 
-void GrammaticalAnalysis::CheckSynbl()//¼ì²é±íÊ¾±êÊ¶·ûÊÇ·ñ±»¶¨Òå
+void GrammaticalAnalysis::CheckSynbl()//æ£€æŸ¥è¡¨ç¤ºæ ‡è¯†ç¬¦æ˜¯å¦è¢«å®šä¹‰
 {
     int m;
     list<Quaternary>::iterator q=Q_list.begin();
     for(q;q!=Q_list.end();q++)
     //vector<Operand> operand
-    //²Ù×÷ÊıÊı×é£¬´æ·Å²Ù×÷·ûºóÃæµÄÈı¸ö²Ù×÷Êı
+    //æ“ä½œæ•°æ•°ç»„ï¼Œå­˜æ”¾æ“ä½œç¬¦åé¢çš„ä¸‰ä¸ªæ“ä½œæ•°
     {
         for(int i=0;i<3;i++)
         {
-            if((*q).operand[i].tpToken->token=="IT")  //Èç¹û²Ù×÷·ûµÄÀàĞÍÎª±êÊ¶·û
+            if((*q).operand[i].tpToken->token=="IT")  //å¦‚æœæ“ä½œç¬¦çš„ç±»å‹ä¸ºæ ‡è¯†ç¬¦
             //(*ch).token.find("IT")!=string::npos
-            //list<SYNBL> SYNBL_list;//±êÊ¶·û±í
+            //list<SYNBL> SYNBL_list;//æ ‡è¯†ç¬¦è¡¨
             {
                 for(list<SYNBL>::iterator it=SYNBL_list.begin();it!=SYNBL_list.end();it++)
                 {
@@ -131,12 +131,12 @@ void GrammaticalAnalysis::CheckSynbl()//¼ì²é±íÊ¾±êÊ¶·ûÊÇ·ñ±»¶¨Òå
                 }
 		        if(m==0)
 		        {
-		            //cout<<"±äÁ¿Î´±»¶¨Òå"<<endl;
+		            //cout<<"å˜é‡æœªè¢«å®šä¹‰"<<endl;
 		            TOKEN Token;
 		            Token.token = "ERROR";
 		            ERRORL newerr;
 		            newerr.name = (*((*((*q).operand[i].tpToken)).tpIT)).name;
-		            newerr.type = 'u'; //±íÊ¾±äÁ¿Î´¶¨Òå
+		            newerr.type = 'u'; //è¡¨ç¤ºå˜é‡æœªå®šä¹‰
 		            ERRORL_list.push_back(newerr);
 		        }
         	}
@@ -145,29 +145,29 @@ void GrammaticalAnalysis::CheckSynbl()//¼ì²é±íÊ¾±êÊ¶·ûÊÇ·ñ±»¶¨Òå
 }
 
 
-int GrammaticalAnalysis::CoutSynbl()//Êä³ö·ûºÅ±í
+int GrammaticalAnalysis::CoutSynbl()//è¾“å‡ºç¬¦å·è¡¨
 {
     cout<<"SYNBL"<<endl;
     for(list<SYNBL>::iterator it=SYNBL_list.begin();it!=SYNBL_list.end();it++)
     {
-        cout<<"±äÁ¿Ãû:"<<(*it).name<<"  ÀàĞÍ:"<<((*it).type)->tval<<"  ÖÖÀà:"<<(*it).cat<<"  ³¤¶È:"<<(*it).lenl->length<<endl;
+        cout<<"å˜é‡å:"<<(*it).name<<"  ç±»å‹:"<<((*it).type)->tval<<"  ç§ç±»:"<<(*it).cat<<"  é•¿åº¦:"<<(*it).lenl->length<<endl;
     }
 }
 
-void GrammaticalAnalysis::CoutRinfl()//Êä³ö½á¹¹±í
+void GrammaticalAnalysis::CoutRinfl()//è¾“å‡ºç»“æ„è¡¨
 {
     cout<<" RINFL:"<<endl;
-    cout<<"ÓòÃû"<<"   Çø¾à"<<"   ÖÖÀà"<<endl;
+    cout<<"åŸŸå"<<"   åŒºè·"<<"   ç§ç±»"<<endl;
     for(list<RINFL>::iterator it=RINFL_list.begin();it!=RINFL_list.end();it++)
             cout<<"  "<<(*it).id<<"      "<<(*it).off<<"      "<<((*it).tp)->tval<<endl;
 }
 
-//È±ÉÙÊä³öÊı×é±í ÓĞ´ı²¹³ä
+//ç¼ºå°‘è¾“å‡ºæ•°ç»„è¡¨ æœ‰å¾…è¡¥å……
 
-void GrammaticalAnalysis::CoutQuaternary()//Êä³öËÄÔªÊ½
+void GrammaticalAnalysis::CoutQuaternary()//è¾“å‡ºå››å…ƒå¼
 {
     for(list<Quaternary>::iterator p=Q_list.begin();p!=Q_list.end();p++)
-    {//Êä³ö¶ÓÁĞÖĞµÄÈ«²¿ËÄÔªÊ½
+    {//è¾“å‡ºé˜Ÿåˆ—ä¸­çš„å…¨éƒ¨å››å…ƒå¼
         cout<<"("<<*((*p).Operator);
         //int num=0;
         for(vector<Operand>::iterator it=(*p).operand.begin();it!=(*p).operand.end();it++)
@@ -178,35 +178,35 @@ void GrammaticalAnalysis::CoutQuaternary()//Êä³öËÄÔªÊ½
             else if(((*(*it).tpToken).token)=="IT")     {cout<<","<<(*(*((*it).tpToken)).tpIT).name;}
             else if(((*(*it).tpToken).token)=="99")     {cout<<",t"<<(*((*it).tpToken)).line;}
             else if(((*(*it).tpToken).token)=="NULL")     cout<<",_";
-            //×¢ÒâÕâÀïÁÙÊ±±äÁ¿µÄ¿¼ÂÇ ºóĞø»¹ĞèÒª½øĞĞĞŞ¸Ä
+            //æ³¨æ„è¿™é‡Œä¸´æ—¶å˜é‡çš„è€ƒè™‘ åç»­è¿˜éœ€è¦è¿›è¡Œä¿®æ”¹
         }
         cout<<")"<<endl;
     }
 }
 
-void GrammaticalAnalysis::Unary_oper_qua()//µ¥Ä¿Ëã·û²Ù×÷ÊıÉú³É
+void GrammaticalAnalysis::Unary_oper_qua()//å•ç›®ç®—ç¬¦æ“ä½œæ•°ç”Ÿæˆ
 {
     Quaternary quat;
-    quat.Operator=(*ch_ope).tpOT;  //Éú³É²Ù×÷·û
-    cout << "µ¥Ä¿ÔËËã·û:" << *((*ch_ope).tpOT) << endl;
+    quat.Operator=(*ch_ope).tpOT;  //ç”Ÿæˆæ“ä½œç¬¦
+    cout << "å•ç›®è¿ç®—ç¬¦:" << *((*ch_ope).tpOT) << endl;
     Operand q;
     q.tpToken=(*(--SEM_stack.end())).tpToken;
-    quat.operand.push_back(q);//µÚÒ»¸öµÚÒ»¸ö²Ù×÷Êı
-    SEM_stack.erase(--SEM_stack.end());//½«Æä´ÓÓïÒåÕ»ÖĞÊÍ·Å
+    quat.operand.push_back(q);//ç¬¬ä¸€ä¸ªç¬¬ä¸€ä¸ªæ“ä½œæ•°
+    SEM_stack.erase(--SEM_stack.end());//å°†å…¶ä»è¯­ä¹‰æ ˆä¸­é‡Šæ”¾
     Operand p;
     p.tpToken=tt.begin();
-    quat.operand.push_back(p);//Éú³ÉµÚ¶ş¸ö²Ù×÷Êı Îª¿Õ
-    TOKEN temp;     //Éú³ÉÁÙÊ±±äÁ¿
+    quat.operand.push_back(p);//ç”Ÿæˆç¬¬äºŒä¸ªæ“ä½œæ•° ä¸ºç©º
+    TOKEN temp;     //ç”Ÿæˆä¸´æ—¶å˜é‡
     temp.token="99";
     temp.line=counter;
     counter++;
     TEMP_var.push_back(temp);
     Operand m;
     m.tpToken=(--TEMP_var.end());
-    quat.operand.push_back(m);  //µÚÈı¸ö²Ù×÷ÊıÎªÁÙÊ±±äÁ¿
+    quat.operand.push_back(m);  //ç¬¬ä¸‰ä¸ªæ“ä½œæ•°ä¸ºä¸´æ—¶å˜é‡
     Q_list.push_back(quat);
     SEM sem;
-    sem.tpToken=(--TEMP_var.end());  //ÁÙÊ±±äÁ¿ÈëÓïÒåÕ»
+    sem.tpToken=(--TEMP_var.end());  //ä¸´æ—¶å˜é‡å…¥è¯­ä¹‰æ ˆ
     SEM_stack.push_back(sem);
     cout<<"danmu"<<endl;
     
@@ -220,25 +220,25 @@ void GrammaticalAnalysis::Unary_oper_qua()//µ¥Ä¿Ëã·û²Ù×÷ÊıÉú³É
 //	    else if(((*(*it).tpToken).token)=="IT")     {cout<<","<<(*(*((*it).tpToken)).tpIT).name;}
 //	    else if(((*(*it).tpToken).token)=="99")     {cout<<",t"<<(*((*it).tpToken)).line;}
 //	    else if(((*(*it).tpToken).token)=="NULL")     cout<<",_";
-//	    //×¢ÒâÕâÀïÁÙÊ±±äÁ¿µÄ¿¼ÂÇ ºóĞø»¹ĞèÒª½øĞĞĞŞ¸Ä
+//	    //æ³¨æ„è¿™é‡Œä¸´æ—¶å˜é‡çš„è€ƒè™‘ åç»­è¿˜éœ€è¦è¿›è¡Œä¿®æ”¹
 //	}
 //	cout<<")"<<endl;
 }
 
-void GrammaticalAnalysis::Assign_oper_qua()//¸³Öµ²Ù×÷ÊıÉú³É
+void GrammaticalAnalysis::Assign_oper_qua()//èµ‹å€¼æ“ä½œæ•°ç”Ÿæˆ
 {
     Quaternary quat;
-    quat.Operator=(*ch_ope).tpOT;  //Éú³É²Ù×÷·û
+    quat.Operator=(*ch_ope).tpOT;  //ç”Ÿæˆæ“ä½œç¬¦
     Operand q;
     q.tpToken=(*(--(SEM_stack.end()))).tpToken;
-    quat.operand.push_back(q);//µÚÒ»¸ö²Ù×÷Êı
-    SEM_stack.pop_back();//½«Æä´ÓÓïÒåÕ»ÖĞÊÍ·Å
+    quat.operand.push_back(q);//ç¬¬ä¸€ä¸ªæ“ä½œæ•°
+    SEM_stack.pop_back();//å°†å…¶ä»è¯­ä¹‰æ ˆä¸­é‡Šæ”¾
     Operand p;
     p.tpToken=tt.begin();
-    quat.operand.push_back(p);//Éú³ÉµÚ¶ş¸ö²Ù×÷ÊıÎª¿Õ
+    quat.operand.push_back(p);//ç”Ÿæˆç¬¬äºŒä¸ªæ“ä½œæ•°ä¸ºç©º
     Operand m;
     m.tpToken=(*(--(SEM_stack.end()))).tpToken;
-    quat.operand.push_back(m);//µÚÈı¸ö²Ù×÷Êı
+    quat.operand.push_back(m);//ç¬¬ä¸‰ä¸ªæ“ä½œæ•°
     Q_list.push_back(quat);
     
     
@@ -252,35 +252,35 @@ void GrammaticalAnalysis::Assign_oper_qua()//¸³Öµ²Ù×÷ÊıÉú³É
 //	    else if(((*(*it).tpToken).token)=="IT")     {cout<<","<<(*(*((*it).tpToken)).tpIT).name;}
 //	    else if(((*(*it).tpToken).token)=="99")     {cout<<",t"<<(*((*it).tpToken)).line;}
 //	    else if(((*(*it).tpToken).token)=="NULL")     cout<<",_";
-//	    //×¢ÒâÕâÀïÁÙÊ±±äÁ¿µÄ¿¼ÂÇ ºóĞø»¹ĞèÒª½øĞĞĞŞ¸Ä
+//	    //æ³¨æ„è¿™é‡Œä¸´æ—¶å˜é‡çš„è€ƒè™‘ åç»­è¿˜éœ€è¦è¿›è¡Œä¿®æ”¹
 //	}
 //	cout<<")"<<endl;
 }
 
-void GrammaticalAnalysis::Bi_oper_qua()//Ë«Ä¿Ëã·û²Ù×÷ÊıÉú³É
+void GrammaticalAnalysis::Bi_oper_qua()//åŒç›®ç®—ç¬¦æ“ä½œæ•°ç”Ÿæˆ
 {
     Quaternary quat;
-    quat.Operator=(*ch_ope).tpOT;  //Éú³É²Ù×÷·û
+    quat.Operator=(*ch_ope).tpOT;  //ç”Ÿæˆæ“ä½œç¬¦
     Operand q;
     q.tpToken=(*(--SEM_stack.end())).tpToken;
-    quat.operand.push_back(q);//µÚÒ»¸ö²Ù×÷Êı
-    SEM_stack.erase(--SEM_stack.end());//½«Æä´ÓÓïÒåÕ»ÖĞÊÍ·Å
+    quat.operand.push_back(q);//ç¬¬ä¸€ä¸ªæ“ä½œæ•°
+    SEM_stack.erase(--SEM_stack.end());//å°†å…¶ä»è¯­ä¹‰æ ˆä¸­é‡Šæ”¾
     Operand p;
     p.tpToken=(*(--SEM_stack.end())).tpToken;
-    quat.operand.push_back(p);//µÚ¶ş¸ö²Ù×÷Êı
-    SEM_stack.erase(--SEM_stack.end());//½«Æä´ÓÓïÒåÕ»ÖĞÊÍ·Å
+    quat.operand.push_back(p);//ç¬¬äºŒä¸ªæ“ä½œæ•°
+    SEM_stack.erase(--SEM_stack.end());//å°†å…¶ä»è¯­ä¹‰æ ˆä¸­é‡Šæ”¾
 
-    TOKEN temp;     //Éú³ÉÁÙÊ±±äÁ¿
+    TOKEN temp;     //ç”Ÿæˆä¸´æ—¶å˜é‡
     temp.token="99";
     temp.line=counter;
     counter++;
     TEMP_var.push_back(temp);
     Operand m;
     m.tpToken=(--TEMP_var.end());
-    quat.operand.push_back(m);  //µÚÈı¸ö²Ù×÷ÊıÎªÁÙÊ±±äÁ¿
+    quat.operand.push_back(m);  //ç¬¬ä¸‰ä¸ªæ“ä½œæ•°ä¸ºä¸´æ—¶å˜é‡
     Q_list.push_back(quat);
     SEM sem;
-    sem.tpToken=(--TEMP_var.end());  //ÁÙÊ±±äÁ¿ÈëÓïÒåÕ»
+    sem.tpToken=(--TEMP_var.end());  //ä¸´æ—¶å˜é‡å…¥è¯­ä¹‰æ ˆ
     SEM_stack.push_back(sem);
     cout<<"shuangmu"<<endl;
     
@@ -294,32 +294,32 @@ void GrammaticalAnalysis::Bi_oper_qua()//Ë«Ä¿Ëã·û²Ù×÷ÊıÉú³É
 //	    else if(((*(*it).tpToken).token)=="IT")     {cout<<","<<(*(*((*it).tpToken)).tpIT).name;}
 //	    else if(((*(*it).tpToken).token)=="99")     {cout<<",t"<<(*((*it).tpToken)).line;}
 //	    else if(((*(*it).tpToken).token)=="NULL")     cout<<",_";
-//	    //×¢ÒâÕâÀïÁÙÊ±±äÁ¿µÄ¿¼ÂÇ ºóĞø»¹ĞèÒª½øĞĞĞŞ¸Ä
+//	    //æ³¨æ„è¿™é‡Œä¸´æ—¶å˜é‡çš„è€ƒè™‘ åç»­è¿˜éœ€è¦è¿›è¡Œä¿®æ”¹
 //	}
 //	cout<<")"<<endl;
 }
 
-void GrammaticalAnalysis::If_While_qua()//IF,WHILE,COUT½á¹¹²Ù×÷ÊıÉú³É
+void GrammaticalAnalysis::If_While_qua()//IF,WHILE,COUTç»“æ„æ“ä½œæ•°ç”Ÿæˆ
 {
     Quaternary quat;
-    quat.Operator=(*ch_ope).tpOT;  //Éú³É²Ù×÷·û
+    quat.Operator=(*ch_ope).tpOT;  //ç”Ÿæˆæ“ä½œç¬¦
 
     if(*((*ch_ope).tpOT)=="if"||*((*ch_ope).tpOT)=="do"||*((*ch_ope).tpOT)=="co")
     {//if do cout
         Operand q;
         q.tpToken=(*(--SEM_stack.end())).tpToken;
-        quat.operand.push_back(q);//µÚÒ»¸öµÚÒ»¸ö²Ù×÷Êı
-        SEM_stack.erase(--SEM_stack.end());//½«Æä´ÓÓïÒåÕ»ÖĞÊÍ·Å
+        quat.operand.push_back(q);//ç¬¬ä¸€ä¸ªç¬¬ä¸€ä¸ªæ“ä½œæ•°
+        SEM_stack.erase(--SEM_stack.end());//å°†å…¶ä»è¯­ä¹‰æ ˆä¸­é‡Šæ”¾
     }
     else
     {
         Operand p;
         p.tpToken=tt.begin();
-        quat.operand.push_back(p);//Éú³ÉµÚÒ»¸ö²Ù×÷Êı Îª¿Õ
+        quat.operand.push_back(p);//ç”Ÿæˆç¬¬ä¸€ä¸ªæ“ä½œæ•° ä¸ºç©º
     }
     Operand p;
     p.tpToken=tt.begin();
-    quat.operand.push_back(p);//Éú³ÉµÚ¶ş¡¢Èı¸ö²Ù×÷Êı Îª¿Õ
+    quat.operand.push_back(p);//ç”Ÿæˆç¬¬äºŒã€ä¸‰ä¸ªæ“ä½œæ•° ä¸ºç©º
     quat.operand.push_back(p);
     Q_list.push_back(quat);
     cout<<"If...."<<endl;
@@ -334,17 +334,17 @@ void GrammaticalAnalysis::If_While_qua()//IF,WHILE,COUT½á¹¹²Ù×÷ÊıÉú³É
 //	    else if(((*(*it).tpToken).token)=="IT")     {cout<<","<<(*(*((*it).tpToken)).tpIT).name;}
 //	    else if(((*(*it).tpToken).token)=="99")     {cout<<",t"<<(*((*it).tpToken)).line;}
 //	    else if(((*(*it).tpToken).token)=="NULL")     cout<<",_";
-//	    //×¢ÒâÕâÀïÁÙÊ±±äÁ¿µÄ¿¼ÂÇ ºóĞø»¹ĞèÒª½øĞĞĞŞ¸Ä
+//	    //æ³¨æ„è¿™é‡Œä¸´æ—¶å˜é‡çš„è€ƒè™‘ åç»­è¿˜éœ€è¦è¿›è¡Œä¿®æ”¹
 //	}
 //	cout<<")"<<endl;
 }
 
-//void GrammaticalAnalysis::GetMark(list<TOKEN>::iterator ch_ope)//»ñÈ¡ÔËËã·û
+//void GrammaticalAnalysis::GetMark(list<TOKEN>::iterator ch_ope)//è·å–è¿ç®—ç¬¦
 //{	
-//	cout<<"ÔËËã·û:"<<*((*ch_ope).tpOT)<<endl;
+//	cout<<"è¿ç®—ç¬¦:"<<*((*ch_ope).tpOT)<<endl;
 //}
 
-void GrammaticalAnalysis::GetMark_front(list<TOKEN>::iterator ch_ope)//»ñÈ¡Ç°ÖÃÔËËã·û
+void GrammaticalAnalysis::GetMark_front(list<TOKEN>::iterator ch_ope)//è·å–å‰ç½®è¿ç®—ç¬¦
 {
 	if((*ch_ope).token == "OT5")
     {//++
@@ -381,7 +381,7 @@ void GrammaticalAnalysis::GetMark_front(list<TOKEN>::iterator ch_ope)//»ñÈ¡Ç°ÖÃÔ
     }
 }
 
-int GrammaticalAnalysis::Start()//Óï·¨·ÖÎö¿ªÊ¼
+int GrammaticalAnalysis::Start()//è¯­æ³•åˆ†æå¼€å§‹
 {
     while(!end)
 	{//Function()
@@ -390,27 +390,27 @@ int GrammaticalAnalysis::Start()//Óï·¨·ÖÎö¿ªÊ¼
     return 1;
 }
 
-int GrammaticalAnalysis::Function()//º¯Êı
+int GrammaticalAnalysis::Function()//å‡½æ•°
 {
     if(!FType())
-    {//FType ·µ»ØÖµÎª0 Ôò Function·µ»ØÖµÎª0
+    {//FType è¿”å›å€¼ä¸º0 åˆ™ Functionè¿”å›å€¼ä¸º0
         return 0;
     }
     if(!end&&(*ch).token.find("IT")!=string::npos)
-    {//IT ÅĞ¶ÏÊÇ·ñÊÇIT£¬ÊÇÔò¶ÁÈëÏÂÒ»¸ö´Ê£¬²»ÊÇÔò·µ»ØÖµÎª0
+    {//IT åˆ¤æ–­æ˜¯å¦æ˜¯ITï¼Œæ˜¯åˆ™è¯»å…¥ä¸‹ä¸€ä¸ªè¯ï¼Œä¸æ˜¯åˆ™è¿”å›å€¼ä¸º0
         ch_function=ch;
         ch_sem=ch_function;
         if ((*(*ch_sem).tpIT).name=="main")
             {nextW();}
         else
         {
-            if(!FindSynbl())//²éÖØ
+            if(!FindSynbl())//æŸ¥é‡
             {
-                PushSynbl();//Ìí¼Ó½ø·ûºÅ±í
-                TYPEL* p=new TYPEL;//¶¨ÒåĞÂµÄÀàĞÍ±í£¬²¢³õÊ¼»¯
+                PushSynbl();//æ·»åŠ è¿›ç¬¦å·è¡¨
+                TYPEL* p=new TYPEL;//å®šä¹‰æ–°çš„ç±»å‹è¡¨ï¼Œå¹¶åˆå§‹åŒ–
                 (*id_now).type=p;
                 ((*id_now).type)->tval='f';
-                (*id_now).lenl=new LENL;//¶¨ÒåĞÂµÄ³¤¶È±í
+                (*id_now).lenl=new LENL;//å®šä¹‰æ–°çš„é•¿åº¦è¡¨
                 (*(id_now)).lenl->length=0;
                 if((*ch).token == "KT2")//int
                     {(*id_now).cat ='i';}
@@ -422,11 +422,11 @@ int GrammaticalAnalysis::Function()//º¯Êı
                     {(*id_now).cat ='v';}
             }
             else
-            {//³öÏÖÓï·¨´íÎó£¬ÖØ¸´¶¨Òå
-                ERRORL e;//¶¨Òå´íÎó±í
+            {//å‡ºç°è¯­æ³•é”™è¯¯ï¼Œé‡å¤å®šä¹‰
+                ERRORL e;//å®šä¹‰é”™è¯¯è¡¨
                 e.name = (*((*ch_sem).tpIT)).name;
                 e.line = (*ch_sem).line;
-                e.type='m';//´íÎóÀàĞÍ
+                e.type='m';//é”™è¯¯ç±»å‹
                 ERRORL_list.push_back(e);
             }
         nextW();
@@ -434,35 +434,35 @@ int GrammaticalAnalysis::Function()//º¯Êı
     }
     else{return 0;}
     if(!end && (*ch).token == "PT2")
-    {//(   ÅĞ¶ÏÊÇ·ñÊÇ(£¬ÊÇÔò¶ÁÈëÏÂÒ»¸ö´Ê£¬²»ÊÇÔò·µ»ØÖµÎª0
+    {//(   åˆ¤æ–­æ˜¯å¦æ˜¯(ï¼Œæ˜¯åˆ™è¯»å…¥ä¸‹ä¸€ä¸ªè¯ï¼Œä¸æ˜¯åˆ™è¿”å›å€¼ä¸º0
         nextW();
     }
     else{return 0;}
     if(!Parameter())
-    {// Parameter()·µ»ØÖµÎª0£¬ÔòFunction·µ»ØÖµÎª0
+    {// Parameter()è¿”å›å€¼ä¸º0ï¼Œåˆ™Functionè¿”å›å€¼ä¸º0
         return 0;
     }
     if(!end &&(*ch).token == "PT3")
-    {//)  ÅĞ¶ÏÊÇ·ñÊÇ)£¬ÊÇÔò¶ÁÈëÏÂÒ»¸ö´Ê£¬²»ÊÇÔò·µ»ØÖµÎª0
+    {//)  åˆ¤æ–­æ˜¯å¦æ˜¯)ï¼Œæ˜¯åˆ™è¯»å…¥ä¸‹ä¸€ä¸ªè¯ï¼Œä¸æ˜¯åˆ™è¿”å›å€¼ä¸º0
         nextW();
     }
     else{return 0;}
     if(!end &&(*ch).token == "PT0")
-    {//{  ÅĞ¶ÏÊÇ·ñÊÇ{£¬ÊÇÔò¶ÁÈëÏÂÒ»¸ö´Ê£¬²»ÊÇÔò·µ»ØÖµÎª0
+    {//{  åˆ¤æ–­æ˜¯å¦æ˜¯{ï¼Œæ˜¯åˆ™è¯»å…¥ä¸‹ä¸€ä¸ªè¯ï¼Œä¸æ˜¯åˆ™è¿”å›å€¼ä¸º0
         nextW();
     }
     else{return 0;}
-    if(!Declaration()){return 0;}//Declaration() ½øÈëDeclaration×Ó³ÌĞò£¬·µ»ØÖµÎª0£¬ÔòFunction·µ»ØÖµÎª0
-    if(!Content()){return 0;}//Content()  ½øÈëContent×Ó³ÌĞò£¬·µ»ØÖµÎª0£¬ÔòFunction·µ»ØÖµÎª0
+    if(!Declaration()){return 0;}//Declaration() è¿›å…¥Declarationå­ç¨‹åºï¼Œè¿”å›å€¼ä¸º0ï¼Œåˆ™Functionè¿”å›å€¼ä¸º0
+    if(!Content()){return 0;}//Content()  è¿›å…¥Contentå­ç¨‹åºï¼Œè¿”å›å€¼ä¸º0ï¼Œåˆ™Functionè¿”å›å€¼ä¸º0
     if(!end &&(*ch).token == "PT1")
-    {//}  ÅĞ¶ÏÊÇ·ñÊÇ}£¬ÊÇÔò¶ÁÈëÏÂÒ»¸ö´Ê£¬²»ÊÇÔò·µ»ØÖµÎª0
+    {//}  åˆ¤æ–­æ˜¯å¦æ˜¯}ï¼Œæ˜¯åˆ™è¯»å…¥ä¸‹ä¸€ä¸ªè¯ï¼Œä¸æ˜¯åˆ™è¿”å›å€¼ä¸º0
         nextW();
     }
     else{return 0;}
     return 1;
 }
 
-int GrammaticalAnalysis::Parameter()//º¯Êı²ÎÊı
+int GrammaticalAnalysis::Parameter()//å‡½æ•°å‚æ•°
 {
     if(!Type())
     {//Type()
@@ -493,7 +493,7 @@ int GrammaticalAnalysis::Parameter()//º¯Êı²ÎÊı
     return 1;
 }
 
-int GrammaticalAnalysis::FType()//º¯ÊıÀàĞÍ
+int GrammaticalAnalysis::FType()//å‡½æ•°ç±»å‹
 {
     if(!end &&(*ch).token == "KT18")
     {//void
@@ -504,7 +504,7 @@ int GrammaticalAnalysis::FType()//º¯ÊıÀàĞÍ
     return 1;
 }
 
-int GrammaticalAnalysis::Type()//»ù±¾Êı¾İÀàĞÍ
+int GrammaticalAnalysis::Type()//åŸºæœ¬æ•°æ®ç±»å‹
 {
     if(!end && (*ch).token == "KT2"){//int
         type = ch;
@@ -524,39 +524,39 @@ int GrammaticalAnalysis::Type()//»ù±¾Êı¾İÀàĞÍ
     return 0;
 }
 
-int GrammaticalAnalysis::Declaration()//ÉùÃ÷
+int GrammaticalAnalysis::Declaration()//å£°æ˜
 {
     while(!end &&((*ch).token == "KT2"||(*ch).token == "KT4"||(*ch).token == "KT6"||(*ch).token == "KT7"))
     {
         if(!end &&(*ch).token == "KT7")
-        {//struct ²»ÄÜÉú³É½á¹¹ÌåËÄÔªÊ½
+        {//struct ä¸èƒ½ç”Ÿæˆç»“æ„ä½“å››å…ƒå¼
             ch_struct=ch;
             nextW();
             if(!end&&(*ch).token.find("IT")!=string::npos)
             {//Identifier
                 ch_sem=ch;
                 nextW();
-                d=1;//½á¹¹Ìå
+                d=1;//ç»“æ„ä½“
                 if(!end &&(*ch).token == "PT0")
                 {//{
                     if(!FindSynbl())
-                    {//²éÖØ
+                    {//æŸ¥é‡
                         PushSynbl();
                         TYPEL* p=new TYPEL;
                         (*(id_now)).type=p;
                         rinfl_now=(*(id_now)).type->rinfl;
                         (*(id_now)).type->tval='t';
-                        (*(id_now)).lenl=new LENL;//¶¨ÒåĞÂµÄ³¤¶È±í
+                        (*(id_now)).lenl=new LENL;//å®šä¹‰æ–°çš„é•¿åº¦è¡¨
                         (*(id_now)).lenl->length=0;
                         (*(id_now)).cat='d';
                         id_struct=id_now;
                 }
                 else
-                {//³öÏÖÓï·¨´íÎó£¬ÖØ¸´¶¨Òå
-                    ERRORL e;//¶¨Òå´íÎó±í
+                {//å‡ºç°è¯­æ³•é”™è¯¯ï¼Œé‡å¤å®šä¹‰
+                    ERRORL e;//å®šä¹‰é”™è¯¯è¡¨
                     e.name = (*((*ch_sem).tpIT)).name;
                     e.line = (*ch_sem).line;
-                    e.type='m';//´íÎóÀàĞÍ
+                    e.type='m';//é”™è¯¯ç±»å‹
                     ERRORL_list.push_back(e);
                 }
                 nextW();
@@ -578,12 +578,12 @@ int GrammaticalAnalysis::Declaration()//ÉùÃ÷
                 }
             }
             else
-            {//½á¹¹Ìå¶¨Òå
+            {//ç»“æ„ä½“å®šä¹‰
                 type=ch_struct;
                 d=0;
                 if(Id())
                 {//IT
-                    (*(id_now)).type->rinfl=(*(id_struct)).type->rinfl;//¶¨ÒåĞÂµÄ³¤¶È±í
+                    (*(id_now)).type->rinfl=(*(id_struct)).type->rinfl;//å®šä¹‰æ–°çš„é•¿åº¦è¡¨
                     (*(id_now)).lenl->length=(*(id_struct)).lenl->length;
                     if(!end &&(*ch).token == "PT8")
                     {//;
@@ -603,7 +603,7 @@ int GrammaticalAnalysis::Declaration()//ÉùÃ÷
     return 1;
 }
 
-int GrammaticalAnalysis::Base_declaration()//»ù±¾ÀàĞÍÉùÃ÷
+int GrammaticalAnalysis::Base_declaration()//åŸºæœ¬ç±»å‹å£°æ˜
 {
     while(Type())
     {//Type()
@@ -639,58 +639,58 @@ int GrammaticalAnalysis::Id()//Id
                 nextW();
                 if(!end &&(*ch).token == "PT5")
                 {//]
-                    if(!FindSynbl())//²éÖØ
+                    if(!FindSynbl())//æŸ¥é‡
                     {
-                        PushSynbl();//Ìí¼Ó½ø·ûºÅ±í
-                        TYPEL* p=new TYPEL;//¶¨ÒåĞÂµÄÀàĞÍ±í£¬²¢³õÊ¼»¯
-                        if(d){p->tval='d';}//½á¹¹ÌåÀàĞÍ
-                        else {p->tval='a';}//Êı×éĞÍ
-                        AINFL newa;//¶¨ÒåĞÂµÄÊı×é±í£¬²¢³õÊ¼»¯
-                        newa.low = 0;//Êı×éÏÂ½çÎª0
-                        newa.up = ((*num_temp).tpI)->numi-1;//Êı×éÉÏ½çÎªinteger-1
-                        newa.ctp = new TYPEL;//³É·ÖÀàĞÍÖ¸Õë£¬Ö¸Ïò¶ÔÓ¦µÄ³É·ÖÀàĞÍ
+                        PushSynbl();//æ·»åŠ è¿›ç¬¦å·è¡¨
+                        TYPEL* p=new TYPEL;//å®šä¹‰æ–°çš„ç±»å‹è¡¨ï¼Œå¹¶åˆå§‹åŒ–
+                        if(d){p->tval='d';}//ç»“æ„ä½“ç±»å‹
+                        else {p->tval='a';}//æ•°ç»„å‹
+                        AINFL newa;//å®šä¹‰æ–°çš„æ•°ç»„è¡¨ï¼Œå¹¶åˆå§‹åŒ–
+                        newa.low = 0;//æ•°ç»„ä¸‹ç•Œä¸º0
+                        newa.up = ((*num_temp).tpI)->numi-1;//æ•°ç»„ä¸Šç•Œä¸ºinteger-1
+                        newa.ctp = new TYPEL;//æˆåˆ†ç±»å‹æŒ‡é’ˆï¼ŒæŒ‡å‘å¯¹åº”çš„æˆåˆ†ç±»å‹
                         if((*type).token == "KT2")//int
                             {(*id_now).cat ='i';}
                         else if((*type).token == "KT4")//real
                             {(*id_now).cat ='r';}
                         else if((*type).token == "KT6")//char
                             {(*id_now).cat ='c';}
-                        newa.clen=(newa.up + 1) * 2;//³É·ÖÀàĞÍµÄ³¤¶È£¬Ä¬ÈÏÎªÊı×é³¤¶È³Ë2
+                        newa.clen=(newa.up + 1) * 2;//æˆåˆ†ç±»å‹çš„é•¿åº¦ï¼Œé»˜è®¤ä¸ºæ•°ç»„é•¿åº¦ä¹˜2
                         AINFL_list.push_back(newa);
                         p->ainfl = --(AINFL_list.end());
-                        (*id_now).lenl = new LENL;//¶¨ÒåĞÂµÄ³¤¶È±í£¬²¢³õÊ¼»¯
-                        (*id_now).lenl->length=newa.clen;//½«³¤¶ÈĞÅÏ¢´æÈë³¤¶È±íÖĞ
+                        (*id_now).lenl = new LENL;//å®šä¹‰æ–°çš„é•¿åº¦è¡¨ï¼Œå¹¶åˆå§‹åŒ–
+                        (*id_now).lenl->length=newa.clen;//å°†é•¿åº¦ä¿¡æ¯å­˜å…¥é•¿åº¦è¡¨ä¸­
                         (*id_now).type = p;
                         if (d)
                         {
                             PushRinfl();
                         }
                     }
-	                else{//³öÏÖÓï·¨´íÎó£¬ÖØ¸´¶¨Òå
-                        ERRORL e;//¶¨Òå´íÎó±í
+	                else{//å‡ºç°è¯­æ³•é”™è¯¯ï¼Œé‡å¤å®šä¹‰
+                        ERRORL e;//å®šä¹‰é”™è¯¯è¡¨
 						e.name = (*((*ch_sem).tpIT)).name;
                         e.line = (*ch_sem).line;
-                        e.type='m';//´íÎóÀàĞÍ
+                        e.type='m';//é”™è¯¯ç±»å‹
                         ERRORL_list.push_back(e);
                     }
                     nextW();
-                    return 1;//Êı×éÀàĞÍ
+                    return 1;//æ•°ç»„ç±»å‹
                 }
                 else {return 0;}
             }
             else {return 0;}
         }
-        else //ÕûĞÍ
+        else //æ•´å‹
         {
             if(!FindSynbl())
-            {//²éÖØ
-                PushSynbl();//Ìí¼Ó½ø·ûºÅ±í
+            {//æŸ¥é‡
+                PushSynbl();//æ·»åŠ è¿›ç¬¦å·è¡¨
                 TYPEL* p=new TYPEL;
                 AINFL newa;
                 RINFL newr;
 				(*id_now).type = p;
-                if(d){((*id_now).type)->tval='d';}//ÓòÃû
-                else {((*id_now).type)->tval='v';}//±äÁ¿
+                if(d){((*id_now).type)->tval='d';}//åŸŸå
+                else {((*id_now).type)->tval='v';}//å˜é‡
                 if((*type).token == "KT2")//int
 	                {(*id_now).cat ='i';}
 	            else if((*type).token == "KT4")//real
@@ -699,23 +699,23 @@ int GrammaticalAnalysis::Id()//Id
 	                {(*id_now).cat ='c';}
 	            else if((*type).token == "KT7")//struct
 	                {(*id_now).cat ='d';}
-                (*id_now).lenl=new LENL;//¶¨ÒåĞÂµÄ³¤¶È±í
-                ((*id_now).lenl)->length=2;//Ä¬ÈÏÉèÖÃint,char,real³¤¶È¾ùÎª2
+                (*id_now).lenl=new LENL;//å®šä¹‰æ–°çš„é•¿åº¦è¡¨
+                ((*id_now).lenl)->length=2;//é»˜è®¤è®¾ç½®int,char,realé•¿åº¦å‡ä¸º2
                 if (d)
                 {
                     PushRinfl();
                 }
             }
             else
-            {//³öÏÖÓï·¨´íÎó£¬ÖØ¸´¶¨Òå
-            	ERRORL e;//¶¨Òå´íÎó±í
+            {//å‡ºç°è¯­æ³•é”™è¯¯ï¼Œé‡å¤å®šä¹‰
+            	ERRORL e;//å®šä¹‰é”™è¯¯è¡¨
 				e.name = (*((*ch_sem).tpIT)).name;
                 e.line = (*ch_sem).line;
-                e.type='m';//´íÎóÀàĞÍ
+                e.type='m';//é”™è¯¯ç±»å‹
                 ERRORL_list.push_back(e);
             }
             return 1;
-        }//»ù±¾ÀàĞÍ±êÊ¶·û
+        }//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦
     }
     return 0;
 }
@@ -730,7 +730,7 @@ int GrammaticalAnalysis::Id_Expression()//Id_Expression
         {//[
             SEM sem;
             sem.tpToken=ch_sem;
-            SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+            SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
             //PushStack();
             nextW();
             if(!end&&(*ch).token.find("ZT")!=string::npos)
@@ -741,7 +741,7 @@ int GrammaticalAnalysis::Id_Expression()//Id_Expression
                 {//]
                     SEM sem;
                     sem.tpToken=ch_sem;
-                    SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+                    SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
                     for(vector<string>::iterator it =  OperatorL.begin(); it != OperatorL.end(); it++)
 			       {
 						if(*it == "arr")
@@ -752,7 +752,7 @@ int GrammaticalAnalysis::Id_Expression()//Id_Expression
 				   }
                     Bi_oper_qua();
                     nextW();
-                    return 1;//Êı×éÀàĞÍ
+                    return 1;//æ•°ç»„ç±»å‹
                 }
                 else {return 0;}
             }
@@ -763,15 +763,15 @@ int GrammaticalAnalysis::Id_Expression()//Id_Expression
             {
                SEM sem;
                 sem.tpToken=ch_sem;
-                SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+                SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
             }
             return 1;
-        }//»ù±¾ÀàĞÍ±êÊ¶·û
+        }//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦
     }
     return 0;
 }
 
-int GrammaticalAnalysis::Content(){//ÄÚÈİ
+int GrammaticalAnalysis::Content(){//å†…å®¹
     while(!end )
     {
         if(!Structure())
@@ -780,13 +780,13 @@ int GrammaticalAnalysis::Content(){//ÄÚÈİ
         }
         else
         {
-            if(!end &&(*ch).token == "PT1"){return 1;}//ÈôÏÂÒ»¸ö´ÊÎª'}',ÔòËµÃ÷½áÊø£¬Ìø³ö
+            if(!end &&(*ch).token == "PT1"){return 1;}//è‹¥ä¸‹ä¸€ä¸ªè¯ä¸º'}',åˆ™è¯´æ˜ç»“æŸï¼Œè·³å‡º
         }
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Structure()//ÄÚÈİ½á¹¹Ñ¡Ôñ
+int GrammaticalAnalysis::Structure()//å†…å®¹ç»“æ„é€‰æ‹©
 {
     if(!Fun())
     {//Fun()
@@ -798,7 +798,7 @@ int GrammaticalAnalysis::Structure()//ÄÚÈİ½á¹¹Ñ¡Ôñ
                 {//While()
                     if(!Cout())
                     {//Cout()
-                        if(!end &&(*ch).token == "PT1"){return 1;}//ÈôÏÂÒ»¸ö´ÊÎª'}',ÔòËµÃ÷½áÊø£¬Ìø³ö,´Ë´¦²»¶Á´Ê
+                        if(!end &&(*ch).token == "PT1"){return 1;}//è‹¥ä¸‹ä¸€ä¸ªè¯ä¸º'}',åˆ™è¯´æ˜ç»“æŸï¼Œè·³å‡º,æ­¤å¤„ä¸è¯»è¯
                         else {return 0;}
                     }
                     else {return 1;}
@@ -817,7 +817,7 @@ int GrammaticalAnalysis::Structure()//ÄÚÈİ½á¹¹Ñ¡Ôñ
     else {return 1;}
 }
 
-int GrammaticalAnalysis::Cout()//Êä³öº¯Êı
+int GrammaticalAnalysis::Cout()//è¾“å‡ºå‡½æ•°
 {
     if(!end &&(*ch).token=="KT33")
     {//cout
@@ -846,7 +846,7 @@ int GrammaticalAnalysis::Cout()//Êä³öº¯Êı
     else {return 0;}
 }
 
-int GrammaticalAnalysis::Fun()//º¯Êı±í´ïÊ½
+int GrammaticalAnalysis::Fun()//å‡½æ•°è¡¨è¾¾å¼
 {
     list<TOKEN>::iterator ch_temp=ch;
     if(!end&&(*ch).token.find("IT")!=string::npos)
@@ -860,7 +860,7 @@ int GrammaticalAnalysis::Fun()//º¯Êı±í´ïÊ½
             {//(
                 nextW();
                 if(!Assignment())
-                {//Assignment(),ÎŞ²ÎÊı
+                {//Assignment(),æ— å‚æ•°
                     if(!end&&(*ch).token=="PT3")
                     {//)
                         nextW();
@@ -874,7 +874,7 @@ int GrammaticalAnalysis::Fun()//º¯Êı±í´ïÊ½
                     else {return 0;}
                 }
                 else
-                {//ÓĞ²ÎÊı
+                {//æœ‰å‚æ•°
                     while(!end&&(*ch).token=="PT9")
                     {//,
                         nextW();
@@ -894,7 +894,7 @@ int GrammaticalAnalysis::Fun()//º¯Êı±í´ïÊ½
                 }
             }
             else
-            {//Èô²»ÊÇº¯Êı±í´ïÊ½£¬Ôò·µ»Ø¼ÇÂ¼Î»ÖÃ
+            {//è‹¥ä¸æ˜¯å‡½æ•°è¡¨è¾¾å¼ï¼Œåˆ™è¿”å›è®°å½•ä½ç½®
                 ch=ch_temp;
                 return 0;
             }
@@ -903,7 +903,7 @@ int GrammaticalAnalysis::Fun()//º¯Êı±í´ïÊ½
     else {return 0;}
 }
 
-int GrammaticalAnalysis::Expression()//±í´ïÊ½
+int GrammaticalAnalysis::Expression()//è¡¨è¾¾å¼
 {
     if(!Assignment()){return 0;}//Assignment()
     while(!end&&(*ch).token=="PT9")
@@ -911,13 +911,13 @@ int GrammaticalAnalysis::Expression()//±í´ïÊ½
         ch_ope=ch;
         nextW();
         if(!Assignment()){return 0;}//Assignment()
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Unary_oper_qua();//µ¥Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Unary_oper_qua();//å•ç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Assignment()//¸³Öµ
+int GrammaticalAnalysis::Assignment()//èµ‹å€¼
 {
     list<TOKEN>::iterator ch_temp=ch;
     if(!end&&(*ch).token=="IT")
@@ -928,7 +928,7 @@ int GrammaticalAnalysis::Assignment()//¸³Öµ
         {
             SEM sem;
             sem.tpToken=ch_sem;
-            SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+            SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
             //PushStack();
             ch_sem=ch;
             nextW();
@@ -951,8 +951,8 @@ int GrammaticalAnalysis::Assignment()//¸³Öµ
                     if(!Logical_or()){return 0;}
                     else
                     {
-                        //GetMark(ch_ope);//»ñÈ¡ÔËËã·û
-                        Assign_oper_qua();//¸³Öµ²Ù×÷ÊıÉú³É
+                        //GetMark(ch_ope);//è·å–è¿ç®—ç¬¦
+                        Assign_oper_qua();//èµ‹å€¼æ“ä½œæ•°ç”Ÿæˆ
                         return 1;
                     }
                 }
@@ -976,7 +976,7 @@ int GrammaticalAnalysis::Assignment()//¸³Öµ
                     else
                     {
                         //GetMark(ch_ope);
-                        Assign_oper_qua();//¸³Öµ²Ù×÷ÊıÉú³É
+                        Assign_oper_qua();//èµ‹å€¼æ“ä½œæ•°ç”Ÿæˆ
                         return 1;
                     }
                 }
@@ -997,7 +997,7 @@ int GrammaticalAnalysis::Assignment()//¸³Öµ
     return 0;
 }
 
-int GrammaticalAnalysis::Logical_or()//Âß¼­»ò
+int GrammaticalAnalysis::Logical_or()//é€»è¾‘æˆ–
 {
     if(!Logical_and()){return 0;}
     while(!end&&(*ch).token=="OT15")
@@ -1005,13 +1005,13 @@ int GrammaticalAnalysis::Logical_or()//Âß¼­»ò
         ch_ope=ch;
         nextW();
         if(!Logical_and()){return 0;}
-		//GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+		//GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Logical_and()//Âß¼­Óë
+int GrammaticalAnalysis::Logical_and()//é€»è¾‘ä¸
 {
     if(!Inclusive_or()){return 0;}
     while(!end&&(*ch).token=="OT14")
@@ -1019,13 +1019,13 @@ int GrammaticalAnalysis::Logical_and()//Âß¼­Óë
         ch_ope=ch;
         nextW();
         if(!Inclusive_or()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Inclusive_or()//»òÔËËã
+int GrammaticalAnalysis::Inclusive_or()//æˆ–è¿ç®—
 {
     if(!Exclusive_or()){return 0;}
     while(!end&&(*ch).token=="OT18")
@@ -1033,13 +1033,13 @@ int GrammaticalAnalysis::Inclusive_or()//»òÔËËã
         ch_ope=ch;
         nextW();
         if(!Exclusive_or()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Exclusive_or()//Òì»òÔËËã
+int GrammaticalAnalysis::Exclusive_or()//å¼‚æˆ–è¿ç®—
 {
     if(!And()){return 0;}
     while(!end&&(*ch).token=="OT19")
@@ -1047,13 +1047,13 @@ int GrammaticalAnalysis::Exclusive_or()//Òì»òÔËËã
         ch_ope=ch;
         nextW();
         if(!And()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::And()//ÓëÔËËã
+int GrammaticalAnalysis::And()//ä¸è¿ç®—
 {
     if(!Equality()){return 0;}
     while(!end&&(*ch).token=="OT17")
@@ -1061,13 +1061,13 @@ int GrammaticalAnalysis::And()//ÓëÔËËã
         ch_ope=ch;
         nextW();
         if(!Equality()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Equality()//µÈÖµÅĞ¶Ï£¬==»òÕß!=
+int GrammaticalAnalysis::Equality()//ç­‰å€¼åˆ¤æ–­ï¼Œ==æˆ–è€…!=
 {
     if(!Relational()){return 0;}
     while(!end&&((*ch).token=="OT12"||(*ch).token=="OT13"))
@@ -1075,14 +1075,14 @@ int GrammaticalAnalysis::Equality()//µÈÖµÅĞ¶Ï£¬==»òÕß!=
         ch_ope=ch;
         nextW();
         if(!Relational()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
 
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Relational()//¹ØÏµÔËËã£¬>,>=,<,<=
+int GrammaticalAnalysis::Relational()//å…³ç³»è¿ç®—ï¼Œ>,>=,<,<=
 {
     if(!Shift()){return 0;}
     while(!end&&((*ch).token=="OT8"||(*ch).token=="OT9"||(*ch).token=="OT10"||(*ch).token=="OT11"))
@@ -1090,14 +1090,14 @@ int GrammaticalAnalysis::Relational()//¹ØÏµÔËËã£¬>,>=,<,<=
         ch_ope=ch;
         nextW();
         if(!Shift()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
 
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Shift()//ÒÆÎ»ÔËËã£¬>>,<<
+int GrammaticalAnalysis::Shift()//ç§»ä½è¿ç®—ï¼Œ>>,<<
 {
     if(!Additive()){return 0;}
     while(!end&&((*ch).token=="OT21"||(*ch).token=="OT22"))
@@ -1105,13 +1105,13 @@ int GrammaticalAnalysis::Shift()//ÒÆÎ»ÔËËã£¬>>,<<
         ch_ope=ch;
         nextW();
         if(!Additive()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Additive()//¼Ó·¨£¬¼õ·¨£¬+,-
+int GrammaticalAnalysis::Additive()//åŠ æ³•ï¼Œå‡æ³•ï¼Œ+,-
 {
     if(!Multiplicative()){return 0;}
     while(!end&&((*ch).token=="OT0"||(*ch).token=="OT1"))
@@ -1119,13 +1119,13 @@ int GrammaticalAnalysis::Additive()//¼Ó·¨£¬¼õ·¨£¬+,-
         ch_ope=ch;
         nextW();
         if(!Multiplicative()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Multiplicative()//³Ë·¨£¬³ı·¨£¬È¡Ä££¬*,/,%
+int GrammaticalAnalysis::Multiplicative()//ä¹˜æ³•ï¼Œé™¤æ³•ï¼Œå–æ¨¡ï¼Œ*,/,%
 {
     if(!Unary()){return 0;}
     while(!end&&((*ch).token=="OT2"||(*ch).token=="OT3"||(*ch).token=="OT4"))
@@ -1133,22 +1133,22 @@ int GrammaticalAnalysis::Multiplicative()//³Ë·¨£¬³ı·¨£¬È¡Ä££¬*,/,%
         ch_ope=ch;
         nextW();
         if(!Unary()){return 0;}
-        //GetMark(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        //GetMark(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
 
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Unary()//Ç°ÖÃËã·û£¬·Ç£¬È¡²¹£¬×ÔÔö£¬×Ô¼õ£¬Çó´óĞ¡,!,~,INC,DEC,sizeof
+int GrammaticalAnalysis::Unary()//å‰ç½®ç®—ç¬¦ï¼Œéï¼Œå–è¡¥ï¼Œè‡ªå¢ï¼Œè‡ªå‡ï¼Œæ±‚å¤§å°,!,~,INC,DEC,sizeof
 {
     if(!end&&((*ch).token=="OT16"||(*ch).token=="OT20"||(*ch).token=="OT5"||(*ch).token=="OT6"||(*ch).token=="KT30"))
     {
         ch_ope=ch;
         nextW();
         if(!Postfix()){return 0;}
-        GetMark_front(ch_ope);//ÓÃÀ´»ñÈ¡ÔËËã·û
-        Unary_oper_qua();//ÓÃÀ´µ¥Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+        GetMark_front(ch_ope);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+        Unary_oper_qua();//ç”¨æ¥å•ç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
     }
     else
     {
@@ -1157,7 +1157,7 @@ int GrammaticalAnalysis::Unary()//Ç°ÖÃËã·û£¬·Ç£¬È¡²¹£¬×ÔÔö£¬×Ô¼õ£¬Çó´óĞ¡,!,~,INC
     return 1;
 }
 
-int GrammaticalAnalysis::Postfix()//ºóÖÃËã·û£¬[Expression],++,--,.
+int GrammaticalAnalysis::Postfix()//åç½®ç®—ç¬¦ï¼Œ[Expression],++,--,.
 {
     if(!Primary()){return 0;}
     while(!end&&((*ch).token=="PT4"||(*ch).token=="OT5"||(*ch).token=="OT6"||(*ch).token=="PT10"))
@@ -1178,7 +1178,7 @@ int GrammaticalAnalysis::Postfix()//ºóÖÃËã·û£¬[Expression],++,--,.
 							break;
 						}
 				   }
-                    Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+                    Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
                 }
                 else {return 0;}
             }
@@ -1188,10 +1188,10 @@ int GrammaticalAnalysis::Postfix()//ºóÖÃËã·û£¬[Expression],++,--,.
             nextW();
             if(!end&&(*ch).token.find("IT")!=string::npos)
             {//Identifier
-                ch_sem=ch;/*ÓïÒå·ÖÎö*/
+                ch_sem=ch;/*è¯­ä¹‰åˆ†æ*/
                 SEM sem;
                 sem.tpToken=ch_sem;
-                SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+                SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
                 for(vector<string>::iterator it =  OperatorL.begin(); it != OperatorL.end(); it++)
 		       {
 					if(*it == ".")
@@ -1200,30 +1200,30 @@ int GrammaticalAnalysis::Postfix()//ºóÖÃËã·û£¬[Expression],++,--,.
 						break;
 					}
 			   }
-                Bi_oper_qua();//ÓÃÀ´Ë«Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+                Bi_oper_qua();//ç”¨æ¥åŒç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
                 nextW();
             }
             else {return 0;}
         }
         else
-        {//ÈôÎª++£¬--£¬Ö±½Ó¶ÁÈ¡ÏÂÒ»¸ö×Ö·û
+        {//è‹¥ä¸º++ï¼Œ--ï¼Œç›´æ¥è¯»å–ä¸‹ä¸€ä¸ªå­—ç¬¦
 
-            //GetMark(ch);//ÓÃÀ´»ñÈ¡ÔËËã·û
-            Unary_oper_qua();//µ¥Ä¿Ëã·ûµÄ²Ù×÷ÊıÉú³É
+            //GetMark(ch);//ç”¨æ¥è·å–è¿ç®—ç¬¦
+            Unary_oper_qua();//å•ç›®ç®—ç¬¦çš„æ“ä½œæ•°ç”Ÿæˆ
             nextW();
         }
     }
     return 1;
 }
 
-int GrammaticalAnalysis::Primary()//Ö÷±í´ïÊ½,±êÊ¶·û£¬³£Á¿£¬¼ÌĞøÑ­»·£ºi,constant,(Expression)
+int GrammaticalAnalysis::Primary()//ä¸»è¡¨è¾¾å¼,æ ‡è¯†ç¬¦ï¼Œå¸¸é‡ï¼Œç»§ç»­å¾ªç¯ï¼ši,constant,(Expression)
 {
     if(!end&&(*ch).token.find("IT")!=string::npos)
     {//Identifier
         ch_sem=ch;
         SEM sem;
         sem.tpToken=ch_sem;
-        SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+        SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
         nextW();
         return 1;
     }
@@ -1232,7 +1232,7 @@ int GrammaticalAnalysis::Primary()//Ö÷±í´ïÊ½,±êÊ¶·û£¬³£Á¿£¬¼ÌĞøÑ­»·£ºi,constant,
         ch_sem=ch;
         SEM sem;
         sem.tpToken=ch_sem;
-        SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+        SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
         nextW();
         return 1;
     }
@@ -1241,7 +1241,7 @@ int GrammaticalAnalysis::Primary()//Ö÷±í´ïÊ½,±êÊ¶·û£¬³£Á¿£¬¼ÌĞøÑ­»·£ºi,constant,
         ch_sem=ch;
         SEM sem;
         sem.tpToken=ch_sem;
-        SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+        SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
         nextW();
         return 1;
     }
@@ -1250,7 +1250,7 @@ int GrammaticalAnalysis::Primary()//Ö÷±í´ïÊ½,±êÊ¶·û£¬³£Á¿£¬¼ÌĞøÑ­»·£ºi,constant,
         ch_sem=ch;
         SEM sem;
         sem.tpToken=ch_sem;
-        SEM_stack.push_back(sem);//»ù±¾ÀàĞÍ±êÊ¶·ûÈëÕ»
+        SEM_stack.push_back(sem);//åŸºæœ¬ç±»å‹æ ‡è¯†ç¬¦å…¥æ ˆ
         nextW();
         return 1;
     }
@@ -1340,7 +1340,7 @@ int GrammaticalAnalysis::IF()//IF
                                     }
                                     else {return 0;}
                                 }
-                                else {return 1;}//ÎŞelse
+                                else {return 1;}//æ— else
                             }
                             else {return 0;}
                         }
@@ -1420,7 +1420,7 @@ int GrammaticalAnalysis::While()//WHILE
     else {return 0;}
 }
 
-int GrammaticalAnalysis::FindSynbl()//²éÖØ
+int GrammaticalAnalysis::FindSynbl()//æŸ¥é‡
 {
     list<SYNBL>::iterator it;
     for(it = SYNBL_list.begin(); it != SYNBL_list.end(); it++)
@@ -1431,14 +1431,14 @@ int GrammaticalAnalysis::FindSynbl()//²éÖØ
 	return 0;
 }
 
-void GrammaticalAnalysis::PushSynbl()//Ìí¼Ó½ø·ûºÅ±í
+void GrammaticalAnalysis::PushSynbl()//æ·»åŠ è¿›ç¬¦å·è¡¨
 {
     SYNBL newid = *((*ch_sem).tpIT);
     SYNBL_list.push_back(newid);
     id_now = --(SYNBL_list.end());
 }
 
-void GrammaticalAnalysis::PushRinfl()//Ìí¼Ó½ø½á¹¹±í
+void GrammaticalAnalysis::PushRinfl()//æ·»åŠ è¿›ç»“æ„è¡¨
 {
     id_now = --(SYNBL_list.end());
 	RINFL newr;
